@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Frequently asked questions about Dr. Josh Therapy Centre — sessions, pricing, confidentiality, and how to get started.">
+  <title>FAQ | Dr. Josh Therapy Centre</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+
+  <style>
+    /* ── PAGE-SPECIFIC STYLES ── */
+
+    /* Hero / Page Header */
+    .page-hero {
+      background: linear-gradient(135deg, #0f1c2e 0%, #1a3250 60%, #0f1c2e 100%);
+      padding: 120px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 60% 40%, rgba(59,130,246,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .page-hero .section-eyebrow {
+      color: #60a5fa;
+      font-size: 0.78rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+    .page-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .page-hero h1 em {
+      font-style: italic;
+      color: #93c5fd;
+    }
+    .page-hero p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.7);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Search Bar */
+    .faq-search-wrap {
+      max-width: 520px;
+      margin: 36px auto 0;
+      position: relative;
+    }
+    .faq-search-wrap input {
+      width: 100%;
+      padding: 14px 20px 14px 48px;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border 0.2s, background 0.2s;
+      box-sizing: border-box;
+    }
+    .faq-search-wrap input::placeholder { color: rgba(255,255,255,0.45); }
+    .faq-search-wrap input:focus {
+      border-color: rgba(96,165,250,0.6);
+      background: rgba(255,255,255,0.12);
+    }
+    .faq-search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,0.5);
+      font-size: 1rem;
+      pointer-events: none;
+    }
+
+    /* FAQ Main Layout */
+    .faq-page {
+      padding: 80px 0 100px;
+      background: #f9fafb;
+    }
+
+    .faq-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* Sidebar Categories */
+    .faq-sidebar {
+      position: sticky;
+      top: 90px;
+    }
+    .faq-sidebar h4 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 14px;
+    }
+    .faq-cat-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .faq-cat-list li a {
+      display: block;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: #374151;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+      font-weight: 400;
+    }
+    .faq-cat-list li a:hover,
+    .faq-cat-list li a.active {
+      background: #e8f0fe;
+      color: #1d4ed8;
+      font-weight: 500;
+    }
+
+    /* FAQ Content */
+    .faq-content { min-width: 0; }
+
+    .faq-section {
+      margin-bottom: 56px;
+    }
+    .faq-section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .faq-section-title .section-emoji {
+      font-size: 1.3rem;
+    }
+
+    /* Accordion Items */
+    .faq-item {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      background: #fff;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+    .faq-item:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .faq-item.open {
+      box-shadow: 0 4px 20px rgba(29,78,216,0.08);
+      border-color: #bfdbfe;
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      text-align: left;
+      gap: 16px;
+    }
+    .faq-question span.q-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #111827;
+      line-height: 1.5;
+    }
+    .faq-question .faq-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: #6b7280;
+      transition: background 0.2s, transform 0.3s, color 0.2s;
+      font-style: normal;
+    }
+    .faq-item.open .faq-icon {
+      background: #1d4ed8;
+      color: #fff;
+      transform: rotate(45deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.25s ease;
+      padding: 0 24px;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 500px;
+      padding: 0 24px 22px;
+    }
+    .faq-answer p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: #4b5563;
+      line-height: 1.75;
+      margin: 0;
+    }
+    .faq-answer a {
+      color: #1d4ed8;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* No-results message */
+    .faq-no-results {
+      text-align: center;
+      padding: 60px 20px;
+      display: none;
+    }
+    .faq-no-results p {
+      font-family: 'DM Sans', sans-serif;
+      color: #6b7280;
+      font-size: 1rem;
+    }
+
+    /* CTA Banner */
+    .faq-cta {
+      background: linear-gradient(135deg, #1a3250 0%, #0f1c2e 100%);
+      border-radius: 20px;
+      padding: 56px 48px;
+      text-align: center;
+      margin-top: 16px;
+    }
+    .faq-cta h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+    .faq-cta p {
+      font-family: 'DM Sans', sans-serif;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.98rem;
+      max-width: 460px;
+      margin: 0 auto 28px;
+      line-height: 1.7;
+    }
+    .faq-cta-btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-cta-blue {
+      background: #2563eb;
+      color: #fff;
+      padding: 13px 28px;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-cta-blue:hover { background: #1d4ed8; }
+    .btn-cta-ghost {
+      background: transparent;
+      color: #fff;
+      padding: 13px 28px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.3);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-cta-ghost:hover {
+      border-color: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .faq-layout {
+        grid-template-columns: 1fr;
+      }
+      .faq-sidebar {
+        position: static;
+        display: none; /* hide sidebar on mobile, categories accessible via scroll */
+      }
+      .page-hero { padding: 100px 0 60px; }
+      .faq-cta { padding: 40px 24px; }
+      .faq-cta h3 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="announce-bar">
+    Now accepting new clients in Port Harcourt &amp; online. &nbsp;
+    <span>207+ lives transformed since 2020.</span>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo">
+          <img src="Images/logo/logo.png" alt="Dr. Josh Therapy Centre">
+          <div class="nav-logo-text">
+            Dr. Josh Therapy Centre
+            <span>Port Harcourt, Nigeria</span>
+          </div>
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li class="has-dropdown">
+            <a href="services/services.html">Services</a>
+            <div class="dropdown">
+              <a href="services/services.html#relationship">❤️ Relationship Therapy</a>
+              <a href="services/services.html#marriage">💍 Marriage Therapy</a>
+              <a href="services/services.html#intimacy">🌿 Intimacy Therapy</a>
+              <a href="services/services.html#family">👨‍👩‍👧 Family Therapy</a>
+              <a href="services/services.html#mental-health">🧠 Mental Health Therapy</a>
+              <a href="services/services.html#emotional">💙 Emotional Healing Therapy</a>
+              <a href="services/services.html#personality">🌱 Personality Development</a>
+            </div>
+          </li>
+          <li><a href="library.html">Library</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="about-us.html">About</a></li>
+          <li><a href="contact-us.html">Contact</a></li>
+          <li><a href="booking.html" class="nav-cta">Book a Session</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-top">
+      <img src="images/logo/logo.png" alt="Logo" style="height:32px;">
+      <button class="mobile-nav-close" id="navClose">✕</button>
+    </div>
+    <a href="index.html">Home</a>
+    <a href="services/services.html">Services</a>
+    <a href="library.html">Library</a>
+    <a href="blog.html">Blog</a>
+    <a href="about-us.html">About</a>
+    <a href="contact-us.html">Contact</a>
+    <a href="booking.html" class="mobile-cta">Book a Session →</a>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="section-eyebrow">Frequently Asked Questions</span>
+      <h1>Everything You Need to <em>Know</em></h1>
+      <p>Answers to the most common questions about our sessions, pricing, confidentiality, and how we can help you.</p>
+      <div class="faq-search-wrap">
+        <span class="faq-search-icon">🔍</span>
+        <input type="text" id="faqSearch" placeholder="Search for a question…" autocomplete="off">
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ MAIN -->
+  <section class="faq-page">
+    <div class="container">
+      <div class="faq-layout">
+
+        <!-- Sidebar -->
+        <aside class="faq-sidebar">
+          <h4>Categories</h4>
+          <ul class="faq-cat-list">
+            <li><a href="#getting-started" class="active">Getting Started</a></li>
+            <li><a href="#sessions">Sessions & Format</a></li>
+            <li><a href="#pricing">Pricing & Payment</a></li>
+            <li><a href="#confidentiality">Confidentiality</a></li>
+            <li><a href="#therapy-types">Therapy Types</a></li>
+            <li><a href="#online-sessions">Online Sessions</a></li>
+            <li><a href="#support">Support & Follow-up</a></li>
+          </ul>
+        </aside>
+
+        <!-- FAQ Accordion Content -->
+        <div class="faq-content" id="faqContent">
+
+          <!-- Getting Started -->
+          <div class="faq-section" id="getting-started">
+            <h2 class="faq-section-title"><span class="section-emoji">🚀</span> Getting Started</h2>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">Do I need a referral to book a session?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>No referral is needed. You can book directly online, via WhatsApp, or by phone. We have made it as simple as possible so nothing stands between you and the help you need.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">What happens in the first session?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>Your first session is an initial assessment. We take time to understand your situation, what you are going through, and what your goals are. There is no pressure — it is a safe, unhurried conversation. Based on this, we match you with the practitioner or specialist who is best equipped to help you.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">How quickly can I get an appointment?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>We typically confirm bookings within 24 hours. For urgent situations, reaching out directly via WhatsApp at <a href="https://wa.me/2349011339978">+234 901 133 9978</a> is the fastest route to getting scheduled.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">I am not sure what kind of therapy I need. Can you help?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>Absolutely. Many clients come to us without knowing exactly what they need — and that is perfectly fine. The initial assessment is specifically designed to figure that out together. You can also <a href="contact-us.html">reach out to us</a> beforehand and we will guide you in the right direction.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sessions & Format -->
+          <div class="faq-section" id="sessions">
+            <h2 class="faq-section-title"><span class="section-emoji">🗓️</span> Sessions & Format</h2>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">How long does a session last?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>Session length depends on the plan you choose. Online sessions (Basic Text and Standard Call) are 30 minutes each. In-person sessions range from 1 hour (Lite) to up to 3 hours (Basic) per sitting. Monthly and Premium plans involve structured sessions twice a week.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">Can I attend sessions in person and online?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>Yes. We offer both in-person sessions at our Port Harcourt centre and online sessions via WhatsApp. You can switch between formats as your schedule or circumstances require — just let us know in advance.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">Can I switch plans or book additional sessions later?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>Yes. You can upgrade, switch, or add sessions at any time. We understand that your needs may evolve, and we are flexible enough to accommodate that without any complications.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">What if I need to cancel or reschedule a session?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>Life happens. We ask that you give us at least 24 hours' notice if you need to cancel or reschedule, so we can offer that time slot to another client in need. Please contact us via WhatsApp or phone to make changes to your booking.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pricing & Payment -->
+          <div class="faq-section" id="pricing">
+            <h2 class="faq-section-title"><span class="section-emoji">💰</span> Pricing & Payment</h2>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">What are your session prices?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>Our pricing ranges from ₦5,000 for a 30-minute online text session to ₦3,000,000 for our comprehensive Premium plan (sessions until you are fully healed, up to one year). You can view all plans and details on our <a href="index.html#pricing">pricing section</a> or the <a href="booking.html">booking page</a>.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">How do I pay for sessions?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>Payment details are confirmed after you book your session. We will share our bank account details via WhatsApp so you can make a transfer before the session begins. If you have any questions about payment, contact us at <a href="mailto:support@drjoshtherapycentre.com">support@drjoshtherapycentre.com</a>.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">What does the Premium plan include?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>The Premium plan (₦3,000,000) is our most comprehensive offering. It includes two sessions every week, ongoing support across all therapy types, priority access to our practitioners, three free books from our library, and sessions that continue until you are fully healed — with a maximum duration of one year.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">Do you offer any discounts or concessions?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>We occasionally offer support for individuals in financial difficulty. If cost is a barrier to getting help, please reach out to us directly and we will do our best to find a suitable arrangement. You can also <a href="donate.html">visit our Donate page</a> — donations help fund subsidised sessions for those who need it most.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Confidentiality -->
+          <div class="faq-section" id="confidentiality">
+            <h2 class="faq-section-title"><span class="section-emoji">🔒</span> Confidentiality & Privacy</h2>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">Is everything I share kept confidential?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>Absolutely. Everything discussed in your sessions remains strictly confidential. Your privacy is not just a policy — it is a core principle of how we work. You can speak freely without fear of judgment or disclosure.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">Will anyone I know find out I am attending therapy?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>No. We do not share your identity, attendance, or any details of your sessions with any third party without your explicit consent. Seeking therapy is a personal decision and we treat it that way.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">How is my personal data stored and protected?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>Any personal information you provide — name, contact details, session notes — is handled with the utmost care and stored securely. We do not sell or share your data with third parties. For full details, see our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Therapy Types -->
+          <div class="faq-section" id="therapy-types">
+            <h2 class="faq-section-title"><span class="section-emoji">🧠</span> Therapy Types</h2>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">Do you offer sessions for couples as well as individuals?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>Yes. We work with individuals, couples, and families. Most of our therapy specialties — especially Relationship, Marriage, Intimacy, and Family Therapy — are designed to accommodate both joint and individual sessions.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">What kinds of issues do you help with?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>We cover seven therapy specialties: Relationship Therapy, Marriage Therapy, Intimacy Therapy, Family Therapy, Mental Health Therapy, Emotional Healing Therapy, and Personality Development. Within each, we address a wide range of specific challenges — from anxiety and grief to infidelity, communication breakdown, and self-worth. See our <a href="services/services.html">full services page</a> for details.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">What if my situation requires clinical or medical support?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>Dr. Josh Therapy Centre works in partnership with licensed clinical practitioners and medical professionals. If your situation requires specialist clinical care, we will connect you with the right professional — seamlessly and without interruption to your support.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">Do you work with children or teenagers?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>Yes. Our Family Therapy services include support for raising teenagers and navigating parent-child conflict. If you are a parent seeking guidance, or if you have a teenager who needs support, please <a href="contact-us.html">get in touch</a> and we will advise the best approach.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Online Sessions -->
+          <div class="faq-section" id="online-sessions">
+            <h2 class="faq-section-title"><span class="section-emoji">💻</span> Online Sessions</h2>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">How do online sessions work?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>Online sessions are conducted via WhatsApp — either as text-based sessions (Basic Text) or live voice/video calls (Standard Call). Once your booking is confirmed and payment is received, your practitioner will connect with you at the agreed time.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">Are online sessions as effective as in-person sessions?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>Yes. Online sessions can be just as impactful as in-person ones, especially when you are in a private, comfortable environment. Many clients actually find it easier to open up from the comfort of their own space. The key is showing up honestly and with intention.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">Can I access therapy if I am outside Port Harcourt or Nigeria?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>Yes. Our online sessions are available to clients anywhere in Nigeria and the wider diaspora. As long as you have a stable internet connection and WhatsApp, we can work with you.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Support & Follow-up -->
+          <div class="faq-section" id="support">
+            <h2 class="faq-section-title"><span class="section-emoji">💙</span> Support & Follow-up</h2>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">How many sessions will I need?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>This varies depending on your situation and goals. Some clients experience meaningful progress in just a few sessions; others benefit from ongoing support over several months. We work at your pace and will always be transparent about what progress looks like for your specific case.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">What support is available between sessions?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>Clients on monthly and premium plans have a dedicated practitioner they can reach between sessions for check-ins. For all other plans, our team is reachable via email at <a href="mailto:support@drjoshtherapycentre.com">support@drjoshtherapycentre.com</a> or WhatsApp during business hours.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">What if I am not satisfied with my session?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>Your wellbeing and experience matter to us deeply. If a session does not meet your expectations, please let us know immediately. We will do everything we can to address your concerns — including reassigning you to a different practitioner if that would better serve you.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question">
+                <span class="q-text">Do you have books or resources I can read on my own?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>Yes! Dr. Josh has published four books covering heartbreak recovery, rebuilding trust after betrayal, integrity in relationships, and relationship foundations. You can browse and purchase them in our <a href="library.html">Library</a>. Standard and Premium plan clients also receive free books as part of their package.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- No results message -->
+          <div class="faq-no-results" id="noResults">
+            <p>No questions matched your search. Try a different keyword, or <a href="contact-us.html">contact us directly</a> and we will answer personally.</p>
+          </div>
+
+          <!-- CTA -->
+          <div class="faq-cta">
+            <h3>Still have a question?</h3>
+            <p>We are happy to answer anything before you book. Reach out and our team will get back to you within 24 hours.</p>
+            <div class="faq-cta-btns">
+              <a href="booking.html" class="btn-cta-blue">📅 Book a Session</a>
+              <a href="contact-us.html" class="btn-cta-ghost">Contact Us →</a>
+            </div>
+          </div>
+
+        </div><!-- /faq-content -->
+      </div><!-- /faq-layout -->
+    </div><!-- /container -->
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="Images/logo/color-logo.png" alt="Dr. Josh Therapy Centre">
+          <p>Healing minds, rebuilding relationships, and transforming lives — one conversation at a time. Based in Port Harcourt, serving Nigeria and beyond.</p>
+          <div class="social-row">
+            <a href="https://www.facebook.com/drjoshgold" target="_blank" rel="noopener" class="social-icon">
+              <img src="Images/social media icons/more/Facebook.png" alt="Facebook">
+            </a>
+            <a href="https://www.instagram.com/drjoshgold" target="_blank" rel="noopener" class="social-icon">
+              <img src="Images/social media icons/more/Instagram.png" alt="Instagram">
+            </a>
+            <a href="https://www.x.com/drjoshgold" target="_blank" rel="noopener" class="social-icon">
+              <img src="Images/social media icons/more/X.png" alt="X">
+            </a>
+            <a href="https://www.tiktok.com/@drjoshgold" target="_blank" rel="noopener" class="social-icon">
+              <img src="Images/social media icons/more/Tiktok.png" alt="TikTok">
+            </a>
+            <a href="https://wa.me/2349011339978" target="_blank" rel="noopener" class="social-icon">
+              <img src="Images/social media icons/more/WhatsApp.png" alt="WhatsApp">
+            </a>
+            <a href="https://www.youtube.com/@drjoshgold" target="_blank" rel="noopener" class="social-icon">
+              <img src="Images/social media icons/more/YouTube.png" alt="YouTube">
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Navigate</h5>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services/services.html">Services</a></li>
+            <li><a href="library.html">Library</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="contact-us.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>More</h5>
+          <ul class="footer-links">
+            <li><a href="partnership.html">Partnership</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="donate.html">Donate</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Use</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <div class="footer-contact-item">
+            <span class="ci-icon">📞</span>
+            <a href="tel:+2349011339978">+234 901 133 9978</a>
+          </div>
+          <div class="footer-contact-item">
+            <span class="ci-icon">✉️</span>
+            <a href="mailto:support@drjoshtherapycentre.com">support@drjoshtherapycentre.com</a>
+          </div>
+          <div class="footer-contact-item">
+            <span class="ci-icon">📍</span>
+            <p>No. 26 Elekahia Road, off Stadium Road, Port Harcourt, Rivers State, Nigeria</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Dr. Josh Therapy Centre. All Rights Reserved.</p>
+        <a href="partnership.html">Partner with Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="js/nav.js"></script>
+  <script>
+    // ── Accordion ──
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        // Close all
+        document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+        // Toggle clicked
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // ── Search / Filter ──
+    const searchInput = document.getElementById('faqSearch');
+    const noResults = document.getElementById('noResults');
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+
+      document.querySelectorAll('.faq-item').forEach(item => {
+        const q = item.querySelector('.q-text').textContent.toLowerCase();
+        const a = item.querySelector('.faq-answer').textContent.toLowerCase();
+        const match = !query || q.includes(query) || a.includes(query);
+        item.style.display = match ? '' : 'none';
+        if (match) visibleCount++;
+      });
+
+      // Show/hide section titles based on visible items within them
+      document.querySelectorAll('.faq-section').forEach(section => {
+        const visible = [...section.querySelectorAll('.faq-item')].some(i => i.style.display !== 'none');
+        section.style.display = visible ? '' : 'none';
+      });
+
+      noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+    });
+
+    // ── Sidebar active link on scroll ──
+    const sections = document.querySelectorAll('.faq-section[id]');
+    const sidebarLinks = document.querySelectorAll('.faq-cat-list a');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          sidebarLinks.forEach(link => link.classList.remove('active'));
+          const active = document.querySelector(`.faq-cat-list a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
+  <script type="module" src="js/analytics.js"></script>
+</body>
+</html>
