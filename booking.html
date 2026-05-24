@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Book a therapy session with Dr. Josh Therapy Centre. Choose your plan, therapy type, and preferred date. Secure payment via Paystack.">
+  <title>Book a Session | Dr. Josh Therapy Centre</title>
+
+  <link rel="icon" type="image/png" href="assets/images/favicon/favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/pages/booking.css">
+</head>
+<body>
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="announce-bar">
+    Now accepting new clients in Port Harcourt &amp; online. &nbsp;
+    <span>207+ lives transformed since 2020.</span>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo">
+          <img src="Images/logo/color-logo.png" alt="Dr. Josh Therapy Centre">
+          <div class="nav-logo-text">
+            Dr. Josh Therapy Centre
+            <span>Port Harcourt, Nigeria</span>
+          </div>
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li class="has-dropdown">
+            <a href="services/services.html">Services</a>
+            <div class="dropdown">
+              <a href="services/services.html#relationship">❤️ Relationship Therapy</a>
+              <a href="services/services.html#marriage">💍 Marriage Therapy</a>
+              <a href="services/services.html#intimacy">🌿 Intimacy Therapy</a>
+              <a href="services/services.html#family">👨‍👩‍👧 Family Therapy</a>
+              <a href="services/services.html#mental-health">🧠 Mental Health Therapy</a>
+              <a href="services/services.html#emotional">💙 Emotional Healing Therapy</a>
+              <a href="services/services.html#personality">🌱 Personality Development</a>
+            </div>
+          </li>
+          <li><a href="library.html">Library</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="about-us.html">About</a></li>
+          <li><a href="contact-us.html">Contact</a></li>
+          <li><a href="booking.html" class="nav-cta">Book a Session</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-top">
+      <img src="Images/logo/color-logo.png" alt="Logo" style="height:32px;">
+      <button class="mobile-nav-close" id="navClose">✕</button>
+    </div>
+    <a href="index.html">Home</a>
+    <a href="services/services.html">Services</a>
+    <a href="library.html">Library</a>
+    <a href="blog.html">Blog</a>
+    <a href="about-us.html">About</a>
+    <a href="contact-us.html">Contact</a>
+    <a href="booking.html" class="mobile-cta">Book a Session →</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="booking-hero">
+    <div class="container">
+      <div class="booking-hero-inner">
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span>›</span>
+          <span style="color:rgba(255,255,255,0.65);">Book a Session</span>
+        </div>
+        <h1>Your Healing Starts<br><em>Right Here.</em></h1>
+        <p>
+          Choose your plan, tell us about yourself, and pay securely online.
+          We will confirm your session within 24 hours and connect you with
+          the right practitioner for your specific situation.
+        </p>
+        <div class="booking-hero-trust">
+          <div class="bht-item">
+            <div class="bht-icon">🔒</div>
+            Secure Paystack Payment
+          </div>
+          <div class="bht-item">
+            <div class="bht-icon">✉️</div>
+            Instant Email Confirmation
+          </div>
+          <div class="bht-item">
+            <div class="bht-icon">⏱️</div>
+            Confirmed Within 24 Hours
+          </div>
+          <div class="bht-item">
+            <div class="bht-icon">🔒</div>
+            100% Confidential
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANS OVERVIEW -->
+  <section class="plans-overview">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Step 1</span>
+        <h2 class="section-title">Choose Your Session Plan</h2>
+        <p class="section-sub">Click a plan to select it. You can also change your selection in the booking form below.</p>
+      </div>
+
+      <div class="plans-group">
+        <div class="plans-group-label">Online Sessions</div>
+        <div class="plans-row">
+          <div class="plan-pill" data-plan="basic-text" onclick="selectPlan('basic-text')">
+            <div class="pp-name">Basic Text</div>
+            <div class="pp-price">₦5,000</div>
+            <div class="pp-period">per 30 minutes</div>
+            <div class="pp-desc">WhatsApp text session with voice notes as an option.</div>
+          </div>
+          <div class="plan-pill" data-plan="standard-call" onclick="selectPlan('standard-call')">
+            <div class="pp-name">Standard Call</div>
+            <div class="pp-price">₦15,000</div>
+            <div class="pp-period">per 30 minutes</div>
+            <div class="pp-desc">WhatsApp voice or video call session.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="plans-group">
+        <div class="plans-group-label">Physical Sessions — In Person</div>
+        <div class="plans-row">
+          <div class="plan-pill" data-plan="lite" onclick="selectPlan('lite')">
+            <div class="pp-name">Lite</div>
+            <div class="pp-price">₦35,000</div>
+            <div class="pp-period">per 1 hour</div>
+            <div class="pp-desc">A focused one-hour in-person session.</div>
+          </div>
+          <div class="plan-pill" data-plan="basic" onclick="selectPlan('basic')">
+            <div class="pp-name">Basic</div>
+            <div class="pp-price">₦100,000</div>
+            <div class="pp-period">up to 3 hours · full day</div>
+            <div class="pp-desc">A thorough, unhurried full-day session.</div>
+          </div>
+          <div class="plan-pill" data-plan="standard" onclick="selectPlan('standard')">
+            <div class="pp-name">Standard</div>
+            <div class="pp-price">₦650,000</div>
+            <div class="pp-period">8 sessions per month</div>
+            <div class="pp-desc">2 sessions every week for a full month.</div>
+          </div>
+          <div class="plan-pill" data-plan="premium" onclick="selectPlan('premium')">
+            <div class="pp-name">Premium</div>
+            <div class="pp-price">₦3,000,000</div>
+            <div class="pp-period">until fully resolved</div>
+            <div class="pp-desc">We work with you until you are healed — up to 1 year.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING FORM -->
+  <section class="booking-form-section" id="booking-form-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Step 2</span>
+        <h2 class="section-title">Fill In Your Details</h2>
+        <p class="section-sub">All information is private and confidential. We use these details to prepare your session and send your confirmation.</p>
+      </div>
+
+      <div class="booking-layout">
+
+        <!-- FORM -->
+        <div class="booking-form-card">
+          <h3>Your Booking Details</h3>
+          <p class="form-intro">Fill in all fields marked as required. The more detail you share, the better we can prepare for your session.</p>
+
+          <!-- Personal Info -->
+          <div class="form-section-label">Personal Information</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="client-name">Full Name *</label>
+              <input type="text" id="client-name" placeholder="Your full name" oninput="updateOrderSummary()">
+            </div>
+            <div class="form-group">
+              <label for="client-phone">Phone / WhatsApp *</label>
+              <input type="tel" id="client-phone" placeholder="+234 000 000 0000">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="client-email">Email Address *</label>
+              <input type="email" id="client-email" placeholder="you@email.com">
+            </div>
+            <div class="form-group">
+              <label for="client-location">Your Location *</label>
+              <input type="text" id="client-location" placeholder="City, State, Country">
+            </div>
+          </div>
+
+          <!-- Session Details -->
+          <div class="form-section-label">Session Details</div>
+          <div class="form-group">
+            <label for="therapy-select">Therapy Type *</label>
+            <select id="therapy-select" onchange="updateOrderSummary()">
+              <option value="">— Select therapy type —</option>
+              <option value="Relationship Therapy">❤️ Relationship Therapy</option>
+              <option value="Marriage Therapy">💍 Marriage Therapy</option>
+              <option value="Intimacy Therapy">🌿 Intimacy Therapy</option>
+              <option value="Family Therapy">👨‍👩‍👧 Family Therapy</option>
+              <option value="Mental Health Therapy">🧠 Mental Health Therapy</option>
+              <option value="Emotional Healing Therapy">💙 Emotional Healing Therapy</option>
+              <option value="Personality Development Therapy">🌱 Personality Development Therapy</option>
+              <option value="Not Sure — I need guidance">🤔 Not Sure — I need guidance</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="plan-select">Session Plan *</label>
+              <select id="plan-select" onchange="updateOrderSummary()">
+                <option value="">— Choose a plan —</option>
+                <optgroup label="Online Sessions">
+                  <option value="basic-text">Basic Text — ₦5,000 / 30 mins</option>
+                  <option value="standard-call">Standard Call — ₦15,000 / 30 mins</option>
+                </optgroup>
+                <optgroup label="Physical Sessions">
+                  <option value="lite">Lite — ₦35,000 / 1 hour</option>
+                  <option value="basic">Basic — ₦100,000 / 3 hours</option>
+                  <option value="standard">Standard — ₦650,000 / month</option>
+                  <option value="premium">Premium — ₦3,000,000 / until healed</option>
+                </optgroup>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="qty-select">Number of Sessions</label>
+              <select id="qty-select" onchange="updateOrderSummary()">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="10">10</option>
+                <option value="12">12</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="mode-select">Session Mode</label>
+              <select id="mode-select" onchange="updateOrderSummary()">
+                <option value="">— Select mode —</option>
+                <option value="Online — WhatsApp Text">Online — WhatsApp Text</option>
+                <option value="Online — WhatsApp Voice Call">Online — WhatsApp Voice Call</option>
+                <option value="Online — WhatsApp Video Call">Online — WhatsApp Video Call</option>
+                <option value="In-Person — Port Harcourt">In-Person — Port Harcourt</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="preferred-date">Preferred Start Date</label>
+              <input type="date" id="preferred-date" onchange="updateOrderSummary()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="preferred-time">Preferred Time</label>
+            <select id="preferred-time" onchange="updateOrderSummary()">
+              <option value="">— Select preferred time —</option>
+              <option value="Morning (8am – 12pm)">Morning (8am – 12pm)</option>
+              <option value="Afternoon (12pm – 4pm)">Afternoon (12pm – 4pm)</option>
+              <option value="Evening (4pm – 7pm)">Evening (4pm – 7pm)</option>
+              <option value="Flexible — any time works">Flexible — any time works</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="client-message">Brief Description of Your Situation (Optional)</label>
+            <textarea
+              id="client-message"
+              rows="4"
+              placeholder="Share as much or as little as you're comfortable with. This helps us prepare the right practitioner for your session..."
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- ORDER SUMMARY SIDEBAR -->
+        <div class="order-summary">
+          <div class="order-summary-card">
+            <div class="os-title">Order Summary</div>
+            <div id="order-summary-content">
+              <p class="os-empty">Select a plan above to see your summary.</p>
+            </div>
+            <div class="os-total">
+              <span class="os-total-label">Total</span>
+              <div class="os-total-amount" id="order-total">
+                <span class="os-empty" style="font-size:14px; color:rgba(255,255,255,0.3);">—</span>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-pay" id="pay-btn" onclick="proceedToPayment()" disabled>
+            🔒 Pay Securely with Paystack
+          </button>
+          <p class="pay-note">Payment is secured and encrypted by Paystack. Your card details are never stored.</p>
+
+          <div class="whatsapp-alt">
+            <p>Prefer to book without paying online? Send us a WhatsApp message instead and we'll arrange payment manually.</p>
+            <button class="btn-whatsapp" onclick="bookViaWhatsApp()">
+              💬 Book via WhatsApp
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING FAQ -->
+  <section class="booking-faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Before You Book</span>
+        <h2 class="section-title">Common Questions</h2>
+      </div>
+      <div class="faq-grid">
+
+        <div class="faq-item">
+          <button class="faq-question">
+            What happens after I pay?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            You will receive an instant email confirmation with your booking details and a receipt. Our team will then contact you within 24 hours via WhatsApp or email to confirm your session date, time, and the practitioner assigned to you.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Can I get a refund if I change my mind?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            Yes. If you need to cancel before your first session, please contact us within 48 hours of payment and we will process a refund. Cancellations made after a session has begun are not eligible for a refund, but we can reschedule sessions where reasonable notice is given.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Is my information kept confidential?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            Absolutely. Everything you share — in this form, in emails, and in your sessions — is strictly confidential. We do not share your information with any third party under any circumstances.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            I am not sure which therapy type I need. What should I select?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            Select "Not Sure — I need guidance" in the therapy type field. Your first session will be an assessment where we understand your situation and determine the right type of therapy and practitioner for you. You do not need to have it all figured out before booking.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Can I book for someone else — a spouse, child, or family member?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            Yes. You can book on behalf of someone else. Simply enter your own payment details and mention in the message field that the session is for another person — include their name and contact information so we can reach them directly.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            What if I need more sessions than my plan covers?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            You can top up or upgrade your plan at any time. Simply book additional sessions using this form, or contact us directly on WhatsApp and we will arrange it for you.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="Images/logo/color-logo.png" alt="Dr. Josh Therapy Centre">
+          <p>Healing minds, rebuilding relationships, and transforming lives — one conversation at a time. Based in Port Harcourt, serving Nigeria and beyond.</p>
+          <div class="social-row">
+            <a href="https://www.facebook.com/drjoshgold" target="_blank" rel="noopener" class="social-icon">
+              <img src="Images/social media icons/more/Facebook.png" alt="Facebook">
+            </a>
+            <a href="https://www.instagram.com/drjoshgold" target="_blank" rel="noopener" class="social-icon">
+              <img src="Images/social media icons/more/Instagram.png" alt="Instagram">
+            </a>
+            <a href="https://www.x.com/drjoshgold" target="_blank" rel="noopener" class="social-icon">
+              <img src="Images/social media icons/more/X.png" alt="X">
+            </a>
+            <a href="https://www.tiktok.com/@drjoshgold" target="_blank" rel="noopener" class="social-icon">
+              <img src="Images/social media icons/more/Tiktok.png" alt="TikTok">
+            </a>
+            <a href="https://wa.me/2349011339978" target="_blank" rel="noopener" class="social-icon">
+              <img src="Images/social media icons/more/WhatsApp.png" alt="WhatsApp">
+            </a>
+            <a href="https://www.youtube.com/@drjoshgold" target="_blank" rel="noopener" class="social-icon">
+              <img src="Images/social media icons/more/YouTube.png" alt="YouTube">
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Navigate</h5>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services/services.html">Services</a></li>
+            <li><a href="library.html">Library</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="contact-us.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>More</h5>
+          <ul class="footer-links">
+            <li><a href="partnership.html">Partnership</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="donate.html">Donate</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Use</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <div class="footer-contact-item">
+            <span class="ci-icon">📞</span>
+            <a href="tel:+2349011339978">+234 901 133 9978</a>
+          </div>
+          <div class="footer-contact-item">
+            <span class="ci-icon">✉️</span>
+            <a href="mailto:support@drjoshtherapycentre.com">support@drjoshtherapycentre.com</a>
+          </div>
+          <div class="footer-contact-item">
+            <span class="ci-icon">📍</span>
+            <p>No. 26 Elekahia Road, off Stadium Road, Port Harcourt, Rivers State, Nigeria</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Dr. Josh Therapy Centre. All Rights Reserved.</p>
+        <a href="partnership.html">Partner with Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SUCCESS MODAL -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-box">
+      <div class="success-icon">✅</div>
+      <h3>Booking Confirmed!</h3>
+      <p class="modal-sub">
+        Thank you, <strong id="s-name"></strong>! Your payment was successful and your session has been booked.
+        We will contact you within 24 hours to confirm your appointment.
+      </p>
+      <div class="receipt-details">
+        <div class="receipt-row"><span class="rl">Therapy Type</span><span class="rv" id="s-therapy"></span></div>
+        <div class="receipt-row"><span class="rl">Plan</span><span class="rv" id="s-plan"></span></div>
+        <div class="receipt-row"><span class="rl">Sessions</span><span class="rv" id="s-sessions"></span></div>
+        <div class="receipt-row"><span class="rl">Mode</span><span class="rv" id="s-mode"></span></div>
+        <div class="receipt-row"><span class="rl">Preferred Date</span><span class="rv" id="s-date"></span></div>
+        <div class="receipt-row"><span class="rl">Amount Paid</span><span class="rv" id="s-amount"></span></div>
+        <div class="receipt-row"><span class="rl">Reference</span><span class="rv" id="s-ref"></span></div>
+        <div class="receipt-row"><span class="rl">Confirmation to</span><span class="rv" id="s-email"></span></div>
+      </div>
+      <div id="emailStatus" class="email-status"></div>
+      <div class="modal-actions">
+        <button class="btn-receipt" onclick="downloadBookingReceipt()">📄 Download Booking Receipt</button>
+        <button class="btn-done" onclick="closeSuccessModal()">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/booking.js"></script>
+  <script type="module" src="js/analytics.js"></script>
+
+</body>
+</html>
