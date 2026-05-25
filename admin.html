@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin | Dr. Josh Therapy Centre</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/pages/admin.css">
+</head>
+<body>
+
+  <!-- ═══ LOGIN VIEW ═══ -->
+  <div id="loginView" class="admin-view">
+    <div class="auth-container">
+      <div class="auth-card">
+        <div class="auth-header">
+          <img src="Images/logo/color-logo.png" alt="Dr. Josh Therapy Centre" style="height:42px;">
+          <h1>Admin Dashboard</h1>
+          <p>Sign in to manage your website</p>
+        </div>
+
+        <div id="authMsg" class="auth-msg"></div>
+
+        <!-- Login Form -->
+        <div id="loginForm">
+          <div class="form-group">
+            <label for="authEmail">Email</label>
+            <input type="email" id="authEmail" placeholder="you@example.com" autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="authPassword">Password</label>
+            <input type="password" id="authPassword" placeholder="••••••••" autocomplete="current-password">
+          </div>
+          <button id="loginBtn" class="btn-primary">Sign In</button>
+          <p class="auth-switch">Don't have an account? <a href="#" id="showSignup">Create one</a></p>
+        </div>
+
+        <!-- Signup Form -->
+        <div id="signupForm" style="display:none;">
+          <div class="form-group">
+            <label for="signupName">Full Name</label>
+            <input type="text" id="signupName" placeholder="Your full name">
+          </div>
+          <div class="form-group">
+            <label for="signupEmail">Email</label>
+            <input type="email" id="signupEmail" placeholder="you@example.com" autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="signupPassword">Password (min 6 characters)</label>
+            <input type="password" id="signupPassword" placeholder="••••••••" autocomplete="new-password">
+          </div>
+          <button id="signupBtn" class="btn-primary">Create Account</button>
+          <p class="auth-switch">Already have an account? <a href="#" id="showLogin">Sign in</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ DASHBOARD VIEW ═══ -->
+  <div id="dashboardView" class="admin-view" style="display:none;">
+    <!-- Top Bar -->
+    <header class="admin-header">
+      <div class="admin-header-inner">
+        <div class="admin-brand">
+          <img src="Images/logo/logo.png" alt="Logo" style="height:28px;">
+          <span>Dr. Josh Therapy Centre — Admin</span>
+        </div>
+        <div class="admin-header-right">
+          <span id="userBadge" class="user-badge"></span>
+          <a href="index.html" class="header-link" target="_blank">View Site ↗</a>
+          <button id="logoutBtn" class="btn-outline-sm">Sign Out</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="admin-layout">
+      <!-- Sidebar -->
+      <aside class="admin-sidebar">
+        <nav class="sidebar-nav">
+          <button class="sidebar-link active" onclick="switchTab('posts')">
+            <span>📝</span> Blog Posts
+          </button>
+          <button id="usersTab" class="sidebar-link" onclick="switchTab('users')" style="display:none;">
+            <span>👥</span> Users
+          </button>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="admin-main">
+        <!-- Posts Tab -->
+        <div id="postsTab" class="tab-content">
+          <div class="tab-header">
+            <h2>Blog Posts</h2>
+            <button id="newPostBtn" class="btn-primary">+ New Post</button>
+          </div>
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Status</th>
+                  <th>Featured</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="postsTableBody">
+                <tr><td colspan="6" style="text-align:center;padding:40px;">Loading posts…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- ═══ EDITOR VIEW ═══ -->
+  <div id="editorView" class="admin-view" style="display:none;">
+    <div class="editor-wrap">
+      <div class="editor-header">
+        <button id="backToPostsBtn" class="btn-outline-sm">← Back to Posts</button>
+        <h2 id="editorTitle">New Post</h2>
+        <div></div>
+      </div>
+      <div id="editorMsg" class="auth-msg"></div>
+      <div class="editor-grid">
+        <div class="editor-main">
+          <div class="form-group">
+            <label for="postTitle">Title *</label>
+            <input type="text" id="postTitle" placeholder="Enter post title">
+          </div>
+          <div class="form-group">
+            <label for="postSlug">URL Slug *</label>
+            <input type="text" id="postSlug" placeholder="my-article-title">
+          </div>
+          <div class="form-group">
+            <label for="postContent">Content *</label>
+            <div id="postContent" style="min-height:350px;"></div>
+          </div>
+          <div class="form-group">
+            <label for="postExcerpt">Excerpt (short summary)</label>
+            <textarea id="postExcerpt" rows="3" placeholder="A brief summary…"></textarea>
+          </div>
+        </div>
+        <div class="editor-sidebar">
+          <div class="meta-card">
+            <h4>Post Settings</h4>
+            <div class="form-group">
+              <label for="postCategory">Category</label>
+              <select id="postCategory">
+                <option value="relationship">❤️ Relationship</option>
+                <option value="marriage">💍 Marriage</option>
+                <option value="intimacy">🌿 Intimacy</option>
+                <option value="family">👨‍👩‍👧 Family</option>
+                <option value="mental">🧠 Mental Health</option>
+                <option value="emotional">💙 Emotional Healing</option>
+                <option value="personal">🌱 Personal Growth</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="postStatus">Status</label>
+              <select id="postStatus">
+                <option value="draft">Draft</option>
+                <option value="published">Published</option>
+                <option value="pending_review">Pending Review</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="postReadTime">Read Time (minutes)</label>
+              <input type="number" id="postReadTime" min="1" max="60" value="5">
+            </div>
+            <div class="form-group checkbox-group">
+              <label>
+                <input type="checkbox" id="postFeatured">
+                ⭐ Feature this post
+              </label>
+            </div>
+            <button id="savePostBtn" class="btn-primary" style="width:100%;">💾 Save Post</button>
+            <button id="cancelEditorBtn" class="btn-outline-sm" style="width:100%;margin-top:8px;">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ USERS VIEW ═══ -->
+  <div id="usersView" class="admin-view" style="display:none;">
+    <header class="admin-header">
+      <div class="admin-header-inner">
+        <div class="admin-brand">
+          <img src="Images/logo/logo.png" alt="Logo" style="height:28px;">
+          <span>Dr. Josh Therapy Centre — Admin</span>
+        </div>
+        <div class="admin-header-right">
+          <span id="userBadge2" class="user-badge"></span>
+          <button id="logoutBtn2" class="btn-outline-sm">Sign Out</button>
+        </div>
+      </div>
+    </header>
+    <div class="admin-layout">
+      <aside class="admin-sidebar">
+        <nav class="sidebar-nav">
+          <button class="sidebar-link" onclick="window.location='admin.html'">
+            <span>📝</span> Blog Posts
+          </button>
+          <button class="sidebar-link active">
+            <span>👥</span> Users
+          </button>
+        </nav>
+      </aside>
+      <main class="admin-main">
+        <div class="tab-header">
+          <h2>User Management</h2>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Joined</th>
+              </tr>
+            </thead>
+            <tbody id="usersTableBody">
+              <tr><td colspan="4" style="text-align:center;padding:40px;">Loading users…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="js/admin.js"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a01500ce0e6cd52e',t:'MTc3OTcxNjk2Mw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

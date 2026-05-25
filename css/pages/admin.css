@@ -1,0 +1,423 @@
+/* ============================================================
+   Admin Dashboard Styles — Dr. Josh Therapy Centre
+   ============================================================ */
+
+   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+   body {
+     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+     background: #f3f4f6;
+     color: #111827;
+     line-height: 1.5;
+   }
+   
+   a { color: #2563eb; text-decoration: none; }
+   a:hover { text-decoration: underline; }
+   
+   /* ─── Auth View ───────────────────────────────────── */
+   .auth-container {
+     min-height: 100vh;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     background: linear-gradient(135deg, #0f1c2e 0%, #1a3250 60%, #0f1c2e 100%);
+     padding: 24px;
+   }
+   
+   .auth-card {
+     background: #fff;
+     border-radius: 16px;
+     padding: 48px 40px;
+     width: 100%;
+     max-width: 420px;
+     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+   }
+   
+   .auth-header {
+     text-align: center;
+     margin-bottom: 28px;
+   }
+   
+   .auth-header h1 {
+     font-size: 1.5rem;
+     font-weight: 700;
+     margin-top: 12px;
+     color: #111827;
+   }
+   
+   .auth-header p {
+     font-size: 0.9rem;
+     color: #6b7280;
+     margin-top: 4px;
+   }
+   
+   .auth-msg {
+     padding: 10px 14px;
+     border-radius: 8px;
+     font-size: 0.85rem;
+     margin-bottom: 16px;
+     display: none;
+   }
+   
+   .auth-msg.error { display: block; background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+   .auth-msg.success { display: block; background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+   .auth-msg.info { display: block; background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+   
+   .auth-switch {
+     text-align: center;
+     margin-top: 18px;
+     font-size: 0.88rem;
+     color: #6b7280;
+   }
+   
+   /* ─── Forms ───────────────────────────────────────── */
+   .form-group {
+     margin-bottom: 18px;
+   }
+   
+   .form-group label {
+     display: block;
+     font-size: 0.85rem;
+     font-weight: 500;
+     color: #374151;
+     margin-bottom: 6px;
+   }
+   
+   .form-group input[type="text"],
+   .form-group input[type="email"],
+   .form-group input[type="password"],
+   .form-group input[type="number"],
+   .form-group textarea,
+   .form-group select {
+     width: 100%;
+     padding: 10px 14px;
+     border: 1px solid #d1d5db;
+     border-radius: 8px;
+     font-size: 0.9rem;
+     font-family: inherit;
+     transition: border-color 0.15s;
+     outline: none;
+     background: #fff;
+   }
+   
+   .form-group input:focus,
+   .form-group textarea:focus,
+   .form-group select:focus {
+     border-color: #2563eb;
+     box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+   }
+   
+   .checkbox-group label {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+     cursor: pointer;
+     font-size: 0.9rem;
+   }
+   
+   .checkbox-group input[type="checkbox"] {
+     width: 18px;
+     height: 18px;
+     accent-color: #2563eb;
+   }
+   
+   /* ─── Buttons ─────────────────────────────────────── */
+   .btn-primary {
+     padding: 11px 22px;
+     background: #2563eb;
+     color: #fff;
+     border: none;
+     border-radius: 8px;
+     font-size: 0.92rem;
+     font-weight: 500;
+     font-family: inherit;
+     cursor: pointer;
+     transition: background 0.2s;
+   }
+   
+   .btn-primary:hover { background: #1d4ed8; }
+   
+   .btn-outline-sm {
+     padding: 8px 16px;
+     background: transparent;
+     color: #6b7280;
+     border: 1px solid #d1d5db;
+     border-radius: 6px;
+     font-size: 0.85rem;
+     font-weight: 500;
+     font-family: inherit;
+     cursor: pointer;
+     transition: all 0.15s;
+   }
+   
+   .btn-outline-sm:hover {
+     border-color: #9ca3af;
+     color: #111827;
+   }
+   
+   /* ─── Admin Header ────────────────────────────────── */
+   .admin-header {
+     background: #fff;
+     border-bottom: 1px solid #e5e7eb;
+     padding: 0 24px;
+     height: 60px;
+     display: flex;
+     align-items: center;
+     position: sticky;
+     top: 0;
+     z-index: 100;
+   }
+   
+   .admin-header-inner {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     width: 100%;
+   }
+   
+   .admin-brand {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+     font-weight: 600;
+     font-size: 0.9rem;
+   }
+   
+   .admin-header-right {
+     display: flex;
+     align-items: center;
+     gap: 14px;
+   }
+   
+   .user-badge {
+     font-size: 0.82rem;
+     color: #6b7280;
+     background: #f3f4f6;
+     padding: 4px 12px;
+     border-radius: 50px;
+   }
+   
+   .header-link {
+     font-size: 0.85rem;
+     color: #2563eb;
+   }
+   
+   /* ─── Layout ──────────────────────────────────────── */
+   .admin-layout {
+     display: flex;
+     min-height: calc(100vh - 60px);
+   }
+   
+   .admin-sidebar {
+     width: 220px;
+     background: #fff;
+     border-right: 1px solid #e5e7eb;
+     padding: 24px 0;
+     flex-shrink: 0;
+   }
+   
+   .sidebar-nav {
+     display: flex;
+     flex-direction: column;
+     gap: 4px;
+     padding: 0 12px;
+   }
+   
+   .sidebar-link {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+     padding: 10px 14px;
+     border: none;
+     background: transparent;
+     border-radius: 8px;
+     font-size: 0.9rem;
+     color: #374151;
+     cursor: pointer;
+     font-family: inherit;
+     transition: all 0.15s;
+     text-align: left;
+     width: 100%;
+   }
+   
+   .sidebar-link:hover { background: #f3f4f6; }
+   .sidebar-link.active { background: #eff6ff; color: #2563eb; font-weight: 500; }
+   
+   .admin-main {
+     flex: 1;
+     padding: 32px;
+     overflow-y: auto;
+   }
+   
+   .tab-header {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     margin-bottom: 24px;
+   }
+   
+   .tab-header h2 {
+     font-size: 1.4rem;
+     font-weight: 600;
+   }
+   
+   /* ─── Table ───────────────────────────────────────── */
+   .table-wrap {
+     background: #fff;
+     border-radius: 12px;
+     border: 1px solid #e5e7eb;
+     overflow: hidden;
+   }
+   
+   .admin-table {
+     width: 100%;
+     border-collapse: collapse;
+   }
+   
+   .admin-table th {
+     text-align: left;
+     padding: 14px 18px;
+     font-size: 0.78rem;
+     font-weight: 600;
+     text-transform: uppercase;
+     letter-spacing: 0.06em;
+     color: #6b7280;
+     background: #f9fafb;
+     border-bottom: 1px solid #e5e7eb;
+   }
+   
+   .admin-table td {
+     padding: 14px 18px;
+     font-size: 0.88rem;
+     border-bottom: 1px solid #f3f4f6;
+   }
+   
+   .admin-table tr:last-child td { border-bottom: none; }
+   .admin-table tr:hover td { background: #f9fafb; }
+   
+   .action-cell {
+     display: flex;
+     gap: 6px;
+   }
+   
+   .tbl-btn {
+     padding: 5px 8px;
+     border: 1px solid #e5e7eb;
+     border-radius: 6px;
+     background: #fff;
+     cursor: pointer;
+     font-size: 0.9rem;
+     transition: all 0.15s;
+   }
+   
+   .tbl-btn:hover { border-color: #9ca3af; }
+   .tbl-btn.delete:hover { border-color: #fca5a5; background: #fef2f2; }
+   
+   /* ─── Badges ──────────────────────────────────────── */
+   .badge {
+     display: inline-block;
+     padding: 3px 10px;
+     border-radius: 50px;
+     font-size: 0.72rem;
+     font-weight: 600;
+     text-transform: uppercase;
+     letter-spacing: 0.05em;
+   }
+   
+   .badge-draft { background: #f3f4f6; color: #6b7280; }
+   .badge-published { background: #d1fae5; color: #065f46; }
+   .badge-pending_review { background: #fef3c7; color: #92400e; }
+   
+   .badge-relationship { background: #fce7f3; color: #be185d; }
+   .badge-marriage { background: #d1fae5; color: #065f46; }
+   .badge-intimacy { background: #fef3c7; color: #92400e; }
+   .badge-family { background: #dbeafe; color: #1e40af; }
+   .badge-mental { background: #e0e7ff; color: #3730a3; }
+   .badge-emotional { background: #fce7f3; color: #be185d; }
+   .badge-personal { background: #f3e8ff; color: #6b21a8; }
+   
+   /* ─── Editor ──────────────────────────────────────── */
+   .editor-wrap {
+     padding: 24px 32px;
+     max-width: 1200px;
+     margin: 0 auto;
+   }
+   
+   .editor-header {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     margin-bottom: 24px;
+   }
+   
+   .editor-header h2 { font-size: 1.3rem; font-weight: 600; }
+   
+   .editor-grid {
+     display: grid;
+     grid-template-columns: 1fr 320px;
+     gap: 28px;
+     align-items: start;
+   }
+   
+   .editor-main .form-group { margin-bottom: 20px; }
+   
+   .meta-card {
+     background: #fff;
+     border: 1px solid #e5e7eb;
+     border-radius: 12px;
+     padding: 24px;
+     position: sticky;
+     top: 84px;
+   }
+   
+   .meta-card h4 {
+     font-size: 0.9rem;
+     font-weight: 600;
+     margin-bottom: 18px;
+     color: #374151;
+   }
+   
+   /* Quill overrides */
+   #postContent {
+     border-radius: 8px;
+     border: 1px solid #d1d5db;
+   }
+   
+   .ql-toolbar {
+     border-radius: 8px 8px 0 0 !important;
+     border-color: #d1d5db !important;
+     background: #f9fafb;
+   }
+   
+   .ql-container {
+     border-radius: 0 0 8px 8px !important;
+     border-color: #d1d5db !important;
+     font-family: 'Inter', sans-serif;
+     font-size: 0.95rem;
+   }
+   
+   /* Role select in users table */
+   .role-select {
+     padding: 5px 10px;
+     border: 1px solid #d1d5db;
+     border-radius: 6px;
+     font-size: 0.85rem;
+     font-family: inherit;
+     background: #fff;
+     cursor: pointer;
+   }
+   
+   .role-select:disabled {
+     opacity: 0.6;
+     cursor: not-allowed;
+   }
+   
+   /* ─── Responsive ──────────────────────────────────── */
+   @media (max-width: 768px) {
+     .admin-sidebar { display: none; }
+     .admin-main { padding: 20px 16px; }
+     .editor-grid { grid-template-columns: 1fr; }
+     .editor-wrap { padding: 16px; }
+     .auth-card { padding: 32px 24px; }
+     .admin-header-right .header-link { display: none; }
+   }
