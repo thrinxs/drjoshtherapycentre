@@ -12,19 +12,47 @@ let quill = null;
 
 // ─── DOM refs ────────────────────────────────────────────
 const $ = id => document.getElementById(id);
-const views   = ['loginView','dashboardView','editorView','usersView'];
+const views   = ['loginView','dashboardView','editorView','usersView','securityView'];
 const show    = id => views.forEach(v => $(v).style.display = v === id ? 'block' : 'none');
+
+const SITE_URL = 'https://drjoshtherapycentre-unp9.vercel.app';
 
 // ─── Init ────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
-  // Load Quill from CDN
+  // Handle email confirmation callback (access_token in URL hash)
+  await handleAuthCallback();
+
   await loadQuill();
   bindAuthEvents();
   bindDashboardEvents();
   bindEditorEvents();
   bindUserEvents();
+  bindSecurityEvents();
   checkSession();
 });
+
+// ─── Handle Email Confirmation Callback ──────────────────
+async function handleAuthCallback() {
+  const hash = window.location.hash;
+  if (hash && hash.includes('access_token')) {
+    // Supabase automatically handles the session from the URL hash
+    const { data, error } = await supabase.auth.getSession();
+    if (error) {
+      console.error('Auth callback error:', error);
+    } else if (data?.session) {
+      // Session established — clean the URL
+      window.history.replaceState(null, '', '/admin.html');
+      // Show a success message
+      setTimeout(() => {
+        const msg = document.createElement('div');
+        msg.style.cssText = 'position:fixed;top:20px;right:20px;background:#d1fae5;color:#065f46;padding:14px 20px;border-radius:10px;font-family:sans-serif;font-size:14px;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,0.1);';
+        msg.textContent = '✅ Email confirmed! You are now signed in.';
+        document.body.appendChild(msg);
+        setTimeout(() => msg.remove(), 4000);
+      }, 500);
+    }
+  }
+}
 
 async function loadQuill() {
   return new Promise((resolve) => {
@@ -52,14 +80,30 @@ async function checkSession() {
 }
 
 async function loadProfile() {
-  const { data } = await supabase
+  // Try loading profile — if it fails (e.g., trigger didn't fire), create it
+  let { data } = await supabase
     .from('profiles')
     .select('*')
     .eq('id', currentUser.id)
     .single();
+
+  if (!data) {
+    // Profile doesn't exist yet — create it manually
+    const { error: insertError } = await supabase.from('profiles').insert({
+      id: currentUser.id,
+      email: currentUser.email,
+      full_name: currentUser.user_metadata?.full_name || currentUser.email?.split('@')[0] || 'User',
+      role: 'client'
+    });
+    if (!insertError) {
+      ({ data } = await supabase.from('profiles').select('*').eq('id', currentUser.id).single());
+    }
+  }
+
   if (data) {
     currentRole = data.role;
     $('userBadge').textContent = `${data.full_name} (${data.role})`;
+    $('userBadge2').textContent = `${data.full_name} (${data.role})`;
     // Show/hide user management tab
     $('usersTab').style.display = data.role === 'admin' ? 'inline-flex' : 'none';
   }
@@ -70,6 +114,7 @@ function bindAuthEvents() {
   $('loginBtn').addEventListener('click', login);
   $('signupBtn').addEventListener('click', signup);
   $('logoutBtn').addEventListener('click', logout);
+  $('logoutBtn2').addEventListener('click', logout);
   $('showSignup').addEventListener('click', (e) => {
     e.preventDefault();
     $('loginForm').style.display = 'none';
@@ -90,7 +135,12 @@ async function login() {
   if (!email || !password) return showAuthMsg('Please enter email and password.', 'error');
   showAuthMsg('Signing in…', 'info');
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-  if (error) return showAuthMsg(error.message, 'error');
+  if (error) {
+    if (error.message.includes('Email not confirmed')) {
+      return showAuthMsg('Please check your email and confirm your address before logging in.', 'error');
+    }
+    return showAuthMsg(error.message, 'error');
+  }
   currentUser = data.user;
   await loadProfile();
   showDashboard();
@@ -104,22 +154,25 @@ async function signup() {
   if (password.length < 6) return showAuthMsg('Password must be at least 6 characters.', 'error');
   showAuthMsg('Creating account…', 'info');
   const { data, error } = await supabase.auth.signUp({
-    email, password,
-    options: { data: { full_name: name } }
+    email,
+    password,
+    options: {
+      data: { full_name: name },
+      emailRedirectTo: `${SITE_URL}/admin.html`
+    }
   });
   if (error) return showAuthMsg(error.message, 'error');
   if (data?.user?.identities?.length === 0) {
     showAuthMsg('An account with this email already exists. Please log in.', 'error');
     return;
   }
-  showAuthMsg('Account created! Check your email for confirmation, then log in.', 'success');
-  // Back to login after 3 seconds
+  showAuthMsg('Account created! A confirmation email has been sent to your inbox. Check your email (including spam) and click the link to verify.', 'success');
+  // Back to login after 5 seconds
   setTimeout(() => {
     $('loginForm').style.display = 'block';
     $('signupForm').style.display = 'none';
     $('authEmail').value = email;
-    $('authMsg').textContent = '';
-  }, 3000);
+  }, 5000);
 }
 
 async function logout() {
@@ -132,19 +185,22 @@ async function logout() {
 function showAuthMsg(text, type) {
   const el = $('authMsg');
   el.textContent = text;
+  // Make sure the element is visible
+  el.style.display = 'block';
   el.className = 'auth-msg ' + type;
 }
 
 // ─── Dashboard ───────────────────────────────────────────
 function showDashboard() {
   show('dashboardView');
-  $('userEmail').textContent = currentUser.email;
+  $('userEmail').textContent = currentUser?.email || '';
   loadPosts();
 }
 
 function bindDashboardEvents() {
   $('newPostBtn').addEventListener('click', () => openEditor());
   $('usersTab').addEventListener('click', () => loadUsers());
+  $('securityTab').addEventListener('click', () => showSecurity());
 }
 
 async function loadPosts() {
@@ -285,8 +341,7 @@ async function savePost() {
 
   if (status === 'published' && !editingPostId) {
     postData.published_at = new Date().toISOString();
-  } else if (status === 'published') {
-    // Check if it was previously draft
+  } else if (status === 'published' && editingPostId) {
     const { data: old } = await supabase.from('blog_posts').select('status').eq('id', editingPostId).single();
     if (old && old.status === 'draft') {
       postData.published_at = new Date().toISOString();
@@ -298,7 +353,6 @@ async function savePost() {
     ({ error } = await supabase.from('blog_posts').update(postData).eq('id', editingPostId));
   } else {
     postData.author_id = currentUser.id;
-    // Therapists' posts go to pending_review
     if (currentRole === 'therapist' && postData.status === 'published') {
       postData.status = 'pending_review';
     }
@@ -314,6 +368,7 @@ async function savePost() {
 function showEditorMsg(text, type) {
   const el = $('editorMsg');
   el.textContent = text;
+  el.style.display = 'block';
   el.className = 'auth-msg ' + type;
 }
 
@@ -325,7 +380,6 @@ window.deletePost = async function(id) {
   loadPosts();
 };
 
-// Expose for inline onclick
 window.openEditor = openEditor;
 
 // ─── User Management ─────────────────────────────────────
@@ -365,13 +419,11 @@ async function loadUsers() {
     </tr>
   `).join('');
 
-  // Bind role change events
   document.querySelectorAll('.role-select').forEach(sel => {
     sel.addEventListener('change', async function() {
       const newRole = this.value;
       const userId = this.dataset.userId;
       if (!confirm('Change this user\'s role to "' + newRole + '"?')) {
-        // Revert
         const { data: orig } = await supabase.from('profiles').select('role').eq('id', userId).single();
         if (orig) this.value = orig.role;
         return;
@@ -382,3 +434,144 @@ async function loadUsers() {
     });
   });
 }
+
+// ─── Security / MFA ──────────────────────────────────────
+function bindSecurityEvents() {
+  $('securityTab').addEventListener('click', showSecurity);
+  $('setupTotpBtn').addEventListener('click', setupTotp);
+  $('disableTotpBtn').addEventListener('click', disableTotp);
+}
+
+async function showSecurity() {
+  show('securityView');
+
+  // Check current MFA factors
+  const { data: factors, error } = await supabase.auth.mfa.listFactors();
+  if (error) {
+    $('securityStatus').innerHTML = `<p style="color:#dc2626;">Error loading security info: ${error.message}</p>`;
+    return;
+  }
+
+  const totpFactor = factors?.all?.find(f => f.factor_type === 'totp');
+  const verifiedTotp = factors?.totp?.length > 0;
+
+  if (verifiedTotp && totpFactor) {
+    // TOTP is already set up and verified
+    $('totpStatus').innerHTML = `
+      <div class="mfa-active">
+        <span class="mfa-badge">✅ Active</span>
+        <p>Authenticator app (TOTP) is enabled on your account.</p>
+        <p style="font-size:0.82rem;color:#6b7280;">When you log in, you'll be prompted for a 6-digit code from your authenticator app after your password.</p>
+      </div>
+    `;
+    $('setupTotpBtn').style.display = 'none';
+    $('disableTotpBtn').style.display = 'inline-flex';
+  } else {
+    // No TOTP set up
+    $('totpStatus').innerHTML = `
+      <p style="color:#6b7280;">You have not set up two-factor authentication yet.</p>
+      <p style="font-size:0.82rem;color:#9ca3af;margin-top:4px;">
+        With 2FA, you'll need both your password and a one-time code from your phone to log in.
+        Supports Google Authenticator, Authy, Microsoft Authenticator, and any TOTP app.
+      </p>
+    `;
+    $('setupTotpBtn').style.display = 'inline-flex';
+    $('disableTotpBtn').style.display = 'none';
+  }
+}
+
+async function setupTotp() {
+  const statusEl = $('totpStatus');
+  statusEl.innerHTML = '<p>Generating QR code…</p>';
+
+  // Step 1: Enroll
+  const { data: enrollData, error: enrollError } = await supabase.auth.mfa.enroll({
+    factorType: 'totp',
+    friendlyName: 'Authenticator App'
+  });
+
+  if (enrollError) {
+    statusEl.innerHTML = `<p style="color:#dc2626;">Error: ${enrollError.message}</p>`;
+    return;
+  }
+
+  const factorId = enrollData.id;
+  const qrUrl = enrollData.totp.qr_code;
+
+  // Show QR code and verification form
+  statusEl.innerHTML = `
+    <div class="mfa-setup">
+      <p style="font-weight:600;margin-bottom:10px;">📱 Scan this QR code with your authenticator app:</p>
+      <div class="qr-container">
+        <img src="${qrUrl}" alt="QR Code" style="width:180px;height:180px;border:1px solid #e5e7eb;border-radius:8px;">
+      </div>
+      <p style="font-size:0.85rem;color:#6b7280;margin:10px 0;">
+        Can't scan? Use this code: <code style="background:#f3f4f6;padding:4px 8px;border-radius:4px;font-size:0.8rem;">${enrollData.totp.secret}</code>
+      </p>
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid #e5e7eb;">
+        <p style="font-weight:500;margin-bottom:8px;">Verify the code from your authenticator app:</p>
+        <div style="display:flex;gap:8px;">
+          <input type="text" id="totpVerifyCode" placeholder="000000" maxlength="6" style="width:120px;padding:10px;border:1px solid #d1d5db;border-radius:6px;font-size:1.1rem;text-align:center;letter-spacing:4px;font-family:monospace;">
+          <button id="verifyTotpBtn" class="btn-primary" style="padding:10px 20px;">Verify</button>
+        </div>
+        <p id="totpVerifyMsg" style="margin-top:8px;font-size:0.85rem;"></p>
+      </div>
+    </div>
+  `;
+
+  $('setupTotpBtn').style.display = 'none';
+
+  document.getElementById('verifyTotpBtn').addEventListener('click', async () => {
+    const code = document.getElementById('totpVerifyCode').value.trim();
+    if (!code || code.length !== 6) {
+      document.getElementById('totpVerifyMsg').textContent = 'Please enter the 6-digit code.';
+      document.getElementById('totpVerifyMsg').style.color = '#dc2626';
+      return;
+    }
+
+    const verifyMsg = document.getElementById('totpVerifyMsg');
+    verifyMsg.textContent = 'Verifying…';
+    verifyMsg.style.color = '#6b7280';
+
+    // Step 2: Verify
+    const { data: verifyData, error: verifyError } = await supabase.auth.mfa.verify({
+      factorId,
+      code
+    });
+
+    if (verifyError) {
+      verifyMsg.textContent = '❌ Incorrect code. Please try again.';
+      verifyMsg.style.color = '#dc2626';
+      return;
+    }
+
+    verifyMsg.textContent = '✅ 2FA enabled successfully!';
+    verifyMsg.style.color = '#16a34a';
+
+    setTimeout(() => showSecurity(), 1500);
+  });
+}
+
+async function disableTotp() {
+  if (!confirm('Are you sure you want to disable two-factor authentication?')) return;
+
+  const { data: factors } = await supabase.auth.mfa.listFactors();
+  const totpFactor = factors?.all?.find(f => f.factor_type === 'totp' && f.status === 'verified');
+
+  if (!totpFactor) {
+    showSecurity();
+    return;
+  }
+
+  const { error } = await supabase.auth.mfa.unenroll({ factorId: totpFactor.id });
+  if (error) return alert('Error: ' + error.message);
+  alert('2FA has been disabled.');
+  showSecurity();
+}
+
+// Expose switchTab for navigation
+window.switchTab = function(tab) {
+  if (tab === 'posts') show('dashboardView');
+  if (tab === 'users') loadUsers();
+  if (tab === 'security') showSecurity();
+};

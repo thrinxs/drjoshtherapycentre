@@ -68,7 +68,7 @@
         </div>
         <div class="admin-header-right">
           <span id="userBadge" class="user-badge"></span>
-          <a href="index.html" class="header-link" target="_blank">View Site ↗</a>
+          <a href="blog.html" class="header-link" target="_blank">View Blog ↗</a>
           <button id="logoutBtn" class="btn-outline-sm">Sign Out</button>
         </div>
       </div>
@@ -83,6 +83,9 @@
           </button>
           <button id="usersTab" class="sidebar-link" onclick="switchTab('users')" style="display:none;">
             <span>👥</span> Users
+          </button>
+          <button id="securityTab" class="sidebar-link" onclick="switchTab('security')">
+            <span>🔐</span> Security
           </button>
         </nav>
       </aside>
@@ -209,11 +212,15 @@
           <button class="sidebar-link active">
             <span>👥</span> Users
           </button>
+          <button class="sidebar-link" onclick="window.location='admin.html#security'">
+            <span>🔐</span> Security
+          </button>
         </nav>
       </aside>
       <main class="admin-main">
         <div class="tab-header">
           <h2>User Management</h2>
+          <p style="color:#6b7280;font-size:0.88rem;">Only admins can change user roles.</p>
         </div>
         <div class="table-wrap">
           <table class="admin-table">
@@ -234,6 +241,90 @@
     </div>
   </div>
 
+  <!-- ═══ SECURITY VIEW ═══ -->
+  <div id="securityView" class="admin-view" style="display:none;">
+    <header class="admin-header">
+      <div class="admin-header-inner">
+        <div class="admin-brand">
+          <img src="Images/logo/logo.png" alt="Logo" style="height:28px;">
+          <span>Dr. Josh Therapy Centre — Admin</span>
+        </div>
+        <div class="admin-header-right">
+          <span id="userBadge3" class="user-badge"></span>
+          <button id="logoutBtn3" class="btn-outline-sm">Sign Out</button>
+        </div>
+      </div>
+    </header>
+    <div class="admin-layout">
+      <aside class="admin-sidebar">
+        <nav class="sidebar-nav">
+          <button class="sidebar-link" onclick="window.location='admin.html'">
+            <span>📝</span> Blog Posts
+          </button>
+          <button id="usersTab2" class="sidebar-link" onclick="window.location='admin.html#users'" style="display:none;">
+            <span>👥</span> Users
+          </button>
+          <button class="sidebar-link active">
+            <span>🔐</span> Security
+          </button>
+        </nav>
+      </aside>
+      <main class="admin-main">
+        <div class="tab-header">
+          <h2>🔐 Security Settings</h2>
+        </div>
+
+        <div class="security-grid">
+          <!-- Password Section -->
+          <div class="security-card">
+            <h3>Password</h3>
+            <p>Your password is managed through Supabase. Use a strong, unique password with at least 8 characters.</p>
+            <a href="https://xiqrsujzxrzddmmtaose.supabase.co/auth/v1/recover" target="_blank" rel="noopener" class="btn-outline-sm" style="margin-top:12px;display:inline-flex;">Reset Password →</a>
+          </div>
+
+          <!-- Email Verification -->
+          <div class="security-card">
+            <h3>📧 Email Verification</h3>
+            <div id="emailStatus">
+              <p>Checking verification status…</p>
+            </div>
+          </div>
+
+          <!-- 2FA / MFA Section -->
+          <div class="security-card" style="grid-column:1/-1;">
+            <h3>🔐 Two-Factor Authentication (2FA)</h3>
+            <p style="color:#6b7280;font-size:0.9rem;margin-bottom:16px;">
+              Add an extra layer of security to your account. After enabling 2FA, you'll need a 
+              one-time code from your authenticator app in addition to your password when logging in.
+            </p>
+
+            <div id="totpStatus">
+              <p>Loading security info…</p>
+            </div>
+
+            <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;">
+              <button id="setupTotpBtn" class="btn-primary">📱 Set Up Authenticator App</button>
+              <button id="disableTotpBtn" class="btn-outline-sm" style="border-color:#fca5a5;color:#dc2626;">Disable 2FA</button>
+            </div>
+          </div>
+
+          <!-- Upcoming: SMS & Biometrics -->
+          <div class="security-card" style="grid-column:1/-1;opacity:0.7;">
+            <h3>📱 SMS Codes</h3>
+            <p style="color:#6b7280;font-size:0.9rem;">Receive a PIN via text message during login. Requires a verified phone number.</p>
+            <button class="btn-outline-sm" disabled style="margin-top:12px;">Coming Soon</button>
+          </div>
+
+          <div class="security-card" style="grid-column:1/-1;opacity:0.7;">
+            <h3>🔓 Face Unlock / Biometrics</h3>
+            <p style="color:#6b7280;font-size:0.9rem;">Use your device's fingerprint, Face ID, or Windows Hello to log in quickly.</p>
+            <button class="btn-outline-sm" disabled style="margin-top:12px;">Coming Soon</button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
   <script type="module" src="js/admin.js"></script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a01500ce0e6cd52e',t:'MTc3OTcxNjk2Mw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0154a761840d52e',t:'MTc3OTcxOTk4MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
