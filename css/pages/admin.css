@@ -71,9 +71,7 @@
    }
    
    /* ─── Forms ───────────────────────────────────────── */
-   .form-group {
-     margin-bottom: 18px;
-   }
+   .form-group { margin-bottom: 18px; }
    
    .form-group label {
      display: block;
@@ -95,7 +93,7 @@
      border-radius: 8px;
      font-size: 0.9rem;
      font-family: inherit;
-     transition: border-color 0.15s;
+     transition: border-color 0.15s, box-shadow 0.15s;
      outline: none;
      background: #fff;
    }
@@ -132,10 +130,32 @@
      font-weight: 500;
      font-family: inherit;
      cursor: pointer;
-     transition: background 0.2s;
+     transition: background 0.2s, transform 0.1s;
+     display: inline-flex;
+     align-items: center;
+     gap: 8px;
    }
    
    .btn-primary:hover { background: #1d4ed8; }
+   .btn-primary:active { transform: scale(0.98); }
+   
+   .btn-secondary {
+     padding: 11px 22px;
+     background: #fff;
+     color: #374151;
+     border: 1px solid #d1d5db;
+     border-radius: 8px;
+     font-size: 0.92rem;
+     font-weight: 500;
+     font-family: inherit;
+     cursor: pointer;
+     transition: all 0.2s;
+     display: inline-flex;
+     align-items: center;
+     gap: 8px;
+   }
+   
+   .btn-secondary:hover { border-color: #9ca3af; background: #f9fafb; }
    
    .btn-outline-sm {
      padding: 8px 16px;
@@ -153,6 +173,51 @@
    .btn-outline-sm:hover {
      border-color: #9ca3af;
      color: #111827;
+   }
+   
+   .btn-danger {
+     padding: 8px 16px;
+     background: transparent;
+     color: #dc2626;
+     border: 1px solid #fca5a5;
+     border-radius: 6px;
+     font-size: 0.85rem;
+     font-weight: 500;
+     font-family: inherit;
+     cursor: pointer;
+     transition: all 0.15s;
+     display: inline-flex;
+     align-items: center;
+     gap: 6px;
+   }
+   
+   .btn-danger:hover {
+     background: #fef2f2;
+     border-color: #f87171;
+   }
+   
+   .btn-success {
+     padding: 11px 22px;
+     background: #16a34a;
+     color: #fff;
+     border: none;
+     border-radius: 8px;
+     font-size: 0.92rem;
+     font-weight: 500;
+     font-family: inherit;
+     cursor: pointer;
+     transition: background 0.2s;
+     display: inline-flex;
+     align-items: center;
+     gap: 8px;
+   }
+   
+   .btn-success:hover { background: #15803d; }
+   
+   .btn:disabled, .btn-primary:disabled, .btn-secondary:disabled {
+     opacity: 0.5;
+     cursor: not-allowed;
+     transform: none;
    }
    
    /* ─── Admin Header ────────────────────────────────── */
@@ -195,6 +260,7 @@
      background: #f3f4f6;
      padding: 4px 12px;
      border-radius: 50px;
+     white-space: nowrap;
    }
    
    .header-link {
@@ -254,6 +320,8 @@
      align-items: center;
      justify-content: space-between;
      margin-bottom: 24px;
+     flex-wrap: wrap;
+     gap: 12px;
    }
    
    .tab-header h2 {
@@ -378,11 +446,6 @@
    }
    
    /* Quill overrides */
-   #postContent {
-     border-radius: 8px;
-     border: 1px solid #d1d5db;
-   }
-   
    .ql-toolbar {
      border-radius: 8px 8px 0 0 !important;
      border-color: #d1d5db !important;
@@ -392,8 +455,12 @@
    .ql-container {
      border-radius: 0 0 8px 8px !important;
      border-color: #d1d5db !important;
-     font-family: 'Inter', sans-serif;
-     font-size: 0.95rem;
+     font-family: 'Inter', sans-serif !important;
+     font-size: 0.95rem !important;
+   }
+   
+   .ql-editor {
+     min-height: 300px;
    }
    
    /* Role select in users table */
@@ -412,7 +479,530 @@
      cursor: not-allowed;
    }
    
-   /* ─── Responsive ──────────────────────────────────── */
+   /* ═══════════════════════════════════════════════════════
+      SECURITY VIEW — Complete Styles
+      ═══════════════════════════════════════════════════════ */
+   
+   /* ── Grid Layout ── */
+   .security-grid {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap: 20px;
+   }
+   
+   /* ── Security Card ── */
+   .security-card {
+     background: #fff;
+     border: 1px solid #e5e7eb;
+     border-radius: 14px;
+     padding: 28px;
+     transition: box-shadow 0.2s, border-color 0.2s;
+   }
+   
+   .security-card:hover {
+     box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+     border-color: #d1d5db;
+   }
+   
+   .security-card.security-card-full {
+     grid-column: 1 / -1;
+   }
+   
+   .security-card.security-card-dim {
+     opacity: 0.65;
+   }
+   .security-card.security-card-dim:hover {
+     opacity: 0.8;
+   }
+   
+   /* ── Card Header / Icon Area ── */
+   .security-card-header {
+     display: flex;
+     align-items: center;
+     gap: 14px;
+     margin-bottom: 12px;
+   }
+   
+   .security-card-icon {
+     width: 40px;
+     height: 40px;
+     border-radius: 10px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     font-size: 1.2rem;
+     flex-shrink: 0;
+   }
+   
+   .security-card-icon.icon-email {
+     background: #eff6ff;
+   }
+   .security-card-icon.icon-password {
+     background: #fef3c7;
+   }
+   .security-card-icon.icon-totp {
+     background: #f0fdf4;
+   }
+   .security-card-icon.icon-biometric {
+     background: #f3e8ff;
+   }
+   .security-card-icon.icon-sms {
+     background: #fce7f3;
+   }
+   
+   .security-card-title-group h3 {
+     font-size: 1rem;
+     font-weight: 600;
+     color: #111827;
+     margin-bottom: 2px;
+   }
+   
+   .security-card-title-group p {
+     font-size: 0.82rem;
+     color: #9ca3af;
+   }
+   
+   .security-card > p {
+     font-size: 0.88rem;
+     color: #6b7280;
+     line-height: 1.65;
+   }
+   
+   /* ── Security Status Badges ── */
+   .security-status {
+     display: inline-flex;
+     align-items: center;
+     gap: 6px;
+     padding: 5px 12px;
+     border-radius: 50px;
+     font-size: 0.77rem;
+     font-weight: 600;
+     letter-spacing: 0.02em;
+   }
+   
+   .security-status.status-active {
+     background: #f0fdf4;
+     color: #16a34a;
+     border: 1px solid #bbf7d0;
+   }
+   
+   .security-status.status-inactive {
+     background: #f9fafb;
+     color: #9ca3af;
+     border: 1px solid #e5e7eb;
+   }
+   
+   .security-status.status-warning {
+     background: #fef3c7;
+     color: #d97706;
+     border: 1px solid #fde68a;
+   }
+   
+   .security-status.status-error {
+     background: #fef2f2;
+     color: #dc2626;
+     border: 1px solid #fecaca;
+   }
+   
+   /* ── MFA Active Box ── */
+   .mfa-active {
+     background: #f0fdf4;
+     border: 1px solid #bbf7d0;
+     border-radius: 10px;
+     padding: 18px;
+     margin-top: 14px;
+   }
+   
+   .mfa-badge {
+     display: inline-block;
+     padding: 3px 10px;
+     border-radius: 50px;
+     font-size: 0.72rem;
+     font-weight: 600;
+     text-transform: uppercase;
+     letter-spacing: 0.05em;
+     background: #16a34a;
+     color: #fff;
+     margin-bottom: 10px;
+   }
+   
+   .mfa-active p {
+     font-size: 0.88rem;
+     color: #374151;
+     line-height: 1.6;
+   }
+   
+   .mfa-active .mfa-hint {
+     font-size: 0.8rem;
+     color: #6b7280;
+     margin-top: 6px;
+   }
+   
+   /* ── MFA Setup Box ── */
+   .mfa-setup {
+     background: #f9fafb;
+     border: 1px solid #e5e7eb;
+     border-radius: 10px;
+     padding: 24px;
+     margin-top: 14px;
+   }
+   
+   .mfa-setup-step {
+     display: flex;
+     align-items: center;
+     gap: 6px;
+     font-size: 0.85rem;
+     color: #6b7280;
+     margin-bottom: 14px;
+   }
+   
+   .mfa-setup-step .step-number {
+     width: 22px;
+     height: 22px;
+     border-radius: 50%;
+     background: #2563eb;
+     color: #fff;
+     font-size: 0.7rem;
+     font-weight: 600;
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+     flex-shrink: 0;
+   }
+   
+   .mfa-setup-step .step-text {
+     font-weight: 500;
+     color: #374151;
+   }
+   
+   /* ── QR Code Container ── */
+   .qr-container {
+     display: flex;
+     justify-content: center;
+     padding: 16px 0;
+   }
+   
+   .qr-container img {
+     width: 180px;
+     height: 180px;
+     border: 2px solid #e5e7eb;
+     border-radius: 10px;
+     padding: 8px;
+     background: #fff;
+     box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+   }
+   
+   /* ── Secret Code Display ── */
+   .secret-code-display {
+     text-align: center;
+     margin: 12px 0;
+   }
+   
+   .secret-code-display label {
+     font-size: 0.78rem;
+     color: #9ca3af;
+     display: block;
+     margin-bottom: 6px;
+   }
+   
+   .secret-code-display code {
+     display: inline-block;
+     background: #fff;
+     border: 1px solid #e5e7eb;
+     padding: 8px 16px;
+     border-radius: 6px;
+     font-size: 0.8rem;
+     font-family: 'SF Mono', 'Fira Code', monospace;
+     color: #374151;
+     user-select: all;
+     cursor: text;
+   }
+   
+   /* ── Verify Code Input ── */
+   .verify-code-section {
+     margin-top: 18px;
+     padding-top: 18px;
+     border-top: 1px solid #e5e7eb;
+   }
+   
+   .verify-code-section p {
+     font-weight: 500;
+     font-size: 0.88rem;
+     color: #374151;
+     margin-bottom: 10px;
+   }
+   
+   .verify-code-row {
+     display: flex;
+     gap: 10px;
+     align-items: center;
+   }
+   
+   .verify-code-input {
+     width: 130px !important;
+     padding: 10px 12px !important;
+     border: 1px solid #d1d5db !important;
+     border-radius: 8px !important;
+     font-size: 1.2rem !important;
+     text-align: center !important;
+     letter-spacing: 5px !important;
+     font-family: 'SF Mono', 'Fira Code', monospace !important;
+     background: #fff !important;
+     outline: none !important;
+     transition: border-color 0.15s, box-shadow 0.15s !important;
+   }
+   
+   .verify-code-input:focus {
+     border-color: #2563eb !important;
+     box-shadow: 0 0 0 3px rgba(37,99,235,0.12) !important;
+   }
+   
+   .verify-code-input::placeholder {
+     letter-spacing: 2px;
+     font-size: 0.9rem;
+     color: #d1d5db;
+   }
+   
+   .verify-msg {
+     font-size: 0.85rem;
+     margin-top: 8px;
+     min-height: 1.4em;
+   }
+   
+   .verify-msg.verify-error { color: #dc2626; }
+   .verify-msg.verify-success { color: #16a34a; }
+   .verify-msg.verify-info { color: #6b7280; }
+   
+   /* ── WebAuthn Prompt State ── */
+   .webauthn-prompt {
+     text-align: center;
+     padding: 20px;
+   }
+   
+   .webauthn-prompt .bio-icon {
+     font-size: 2.5rem;
+     margin-bottom: 12px;
+   }
+   
+   .webauthn-prompt .bio-loader {
+     display: inline-block;
+     width: 32px;
+     height: 32px;
+     border: 3px solid #e5e7eb;
+     border-top-color: #2563eb;
+     border-radius: 50%;
+     animation: spin 0.8s linear infinite;
+     margin: 12px auto;
+   }
+   
+   @keyframes spin {
+     to { transform: rotate(360deg); }
+   }
+   
+   .webauthn-prompt p {
+     font-size: 0.88rem;
+     color: #6b7280;
+   }
+   
+   /* ── Action Button Row in Security Cards ── */
+   .security-actions {
+     display: flex;
+     gap: 10px;
+     flex-wrap: wrap;
+     margin-top: 18px;
+   }
+   
+   .security-actions .btn-primary,
+   .security-actions .btn-secondary,
+   .security-actions .btn-danger {
+     font-size: 0.85rem;
+     padding: 9px 18px;
+   }
+   
+   /* ── Info Card (bottom card with login flow) ── */
+   .security-info-card {
+     grid-column: 1 / -1;
+     background: #f9fafb;
+     border: 1px solid #e5e7eb;
+     border-radius: 14px;
+     padding: 28px;
+   }
+   
+   .security-info-card h3 {
+     font-size: 1rem;
+     font-weight: 600;
+     color: #111827;
+     margin-bottom: 4px;
+   }
+   
+   .security-info-card h4 {
+     font-size: 0.88rem;
+     font-weight: 600;
+     color: #374151;
+     margin-top: 18px;
+     margin-bottom: 10px;
+   }
+   
+   .security-info-card ol {
+     padding-left: 20px;
+     margin: 0;
+   }
+   
+   .security-info-card ol li {
+     font-size: 0.88rem;
+     color: #6b7280;
+     line-height: 1.8;
+     margin-bottom: 6px;
+   }
+   
+   .security-info-card ol li strong {
+     color: #374151;
+   }
+   
+   .security-info-card .security-tip {
+     background: #eff6ff;
+     border: 1px solid #bfdbfe;
+     border-radius: 8px;
+     padding: 14px 16px;
+     margin-top: 16px;
+     font-size: 0.85rem;
+     color: #1e40af;
+     display: flex;
+     align-items: flex-start;
+     gap: 10px;
+   }
+   
+   .security-info-card .security-tip .tip-icon {
+     flex-shrink: 0;
+     font-size: 1.1rem;
+   }
+   
+   /* ── Device Name / Detail Row ── */
+   .mfa-device-detail {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+     padding: 10px 14px;
+     background: #fff;
+     border: 1px solid #e5e7eb;
+     border-radius: 8px;
+     margin-top: 10px;
+   }
+   
+   .mfa-device-detail .device-icon { font-size: 1.2rem; }
+   
+   .mfa-device-detail .device-info {
+     flex: 1;
+   }
+   
+   .mfa-device-detail .device-info .device-name {
+     font-size: 0.88rem;
+     font-weight: 500;
+     color: #111827;
+   }
+   
+   .mfa-device-detail .device-info .device-date {
+     font-size: 0.78rem;
+     color: #9ca3af;
+   }
+   
+   /* ── Loading / Empty States ── */
+   .security-loading {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 12px;
+     padding: 24px;
+     color: #9ca3af;
+   }
+   
+   .security-loading .spinner {
+     width: 28px;
+     height: 28px;
+     border: 3px solid #e5e7eb;
+     border-top-color: #2563eb;
+     border-radius: 50%;
+     animation: spin 0.8s linear infinite;
+   }
+   
+   .security-empty {
+     text-align: center;
+     padding: 24px;
+     color: #9ca3af;
+   }
+   
+   .security-empty .empty-icon {
+     font-size: 2rem;
+     margin-bottom: 8px;
+   }
+   
+   .security-empty p {
+     font-size: 0.88rem;
+   }
+   
+   /* ── Email Verification Status ── */
+   .email-verified {
+     background: #f0fdf4;
+     border: 1px solid #bbf7d0;
+     border-radius: 10px;
+     padding: 18px;
+     margin-top: 14px;
+   }
+   
+   .email-verified .verified-label {
+     display: inline-block;
+     padding: 3px 10px;
+     border-radius: 50px;
+     font-size: 0.72rem;
+     font-weight: 600;
+     text-transform: uppercase;
+     letter-spacing: 0.05em;
+     background: #16a34a;
+     color: #fff;
+     margin-bottom: 8px;
+   }
+   
+   .email-verified p { font-size: 0.88rem; color: #374151; }
+   .email-verified .email-addr { font-weight: 600; color: #111827; }
+   .email-verified .email-date { font-size: 0.8rem; color: #6b7280; margin-top: 6px; }
+   
+   .email-unverified {
+     background: #fef3c7;
+     border: 1px solid #fde68a;
+     border-radius: 10px;
+     padding: 18px;
+     margin-top: 14px;
+   }
+   
+   .email-unverified p {
+     font-size: 0.88rem;
+     color: #92400e;
+   }
+   
+   .email-unverified .resend-btn {
+     margin-top: 12px;
+     padding: 7px 16px;
+     background: #fff;
+     border: 1px solid #d1d5db;
+     border-radius: 6px;
+     font-size: 0.82rem;
+     font-weight: 500;
+     color: #374151;
+     cursor: pointer;
+     font-family: inherit;
+     transition: all 0.15s;
+   }
+   
+   .email-unverified .resend-btn:hover {
+     border-color: #9ca3af;
+     background: #f9fafb;
+   }
+   
+   /* ── Responsive ──────────────────────────────────── */
+   @media (max-width: 1024px) {
+     .security-grid { grid-template-columns: 1fr; }
+   }
+   
    @media (max-width: 768px) {
      .admin-sidebar { display: none; }
      .admin-main { padding: 20px 16px; }
@@ -420,4 +1010,13 @@
      .editor-wrap { padding: 16px; }
      .auth-card { padding: 32px 24px; }
      .admin-header-right .header-link { display: none; }
+     .user-badge { font-size: 0.75rem; padding: 3px 8px; }
+   
+     .security-card { padding: 20px; }
+     .mfa-setup { padding: 16px; }
+     .verify-code-row { flex-direction: column; align-items: stretch; }
+     .verify-code-input { width: 100% !important; }
+   
+     .security-info-card { padding: 20px; }
+     .security-info-card ol { padding-left: 16px; }
    }
