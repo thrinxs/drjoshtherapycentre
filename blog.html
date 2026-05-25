@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Insights, advice, and honest conversations on relationships, marriage, mental health, and personal growth — from Dr. Josh Therapy Centre.">
+  <title>Blog | Dr. Josh Therapy Centre</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+
+  <style>
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: linear-gradient(135deg, #0f1c2e 0%, #1a3250 60%, #0f1c2e 100%);
+      padding: 120px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 60% 40%, rgba(59,130,246,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .page-hero .section-eyebrow {
+      color: #60a5fa;
+      font-size: 0.78rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+    .page-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .page-hero h1 em {
+      font-style: italic;
+      color: #93c5fd;
+    }
+    .page-hero p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.7);
+      max-width: 540px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── FILTER TABS ── */
+    .blog-filters {
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .blog-filters-inner {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      padding: 14px 0;
+      scrollbar-width: none;
+    }
+    .blog-filters-inner::-webkit-scrollbar { display: none; }
+    .filter-btn {
+      flex-shrink: 0;
+      padding: 8px 18px;
+      border-radius: 50px;
+      border: 1px solid #e5e7eb;
+      background: transparent;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      color: #6b7280;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .filter-btn:hover { border-color: #93c5fd; color: #1d4ed8; }
+    .filter-btn.active {
+      background: #1d4ed8;
+      border-color: #1d4ed8;
+      color: #fff;
+      font-weight: 500;
+    }
+
+    /* ── BLOG MAIN ── */
+    .blog-page {
+      padding: 64px 0 100px;
+      background: #f9fafb;
+    }
+
+    /* Featured Post */
+    .featured-post {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-bottom: 56px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      border: 1px solid #e5e7eb;
+    }
+    .featured-post-img {
+      background: linear-gradient(135deg, #1a3250 0%, #2563eb 100%);
+      min-height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .featured-post-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.08) 0%, transparent 60%);
+    }
+    .featured-post-body {
+      padding: 48px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .featured-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 50px;
+      margin-bottom: 16px;
+      width: fit-content;
+    }
+    .featured-post-body h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+      font-weight: 600;
+      color: #111827;
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+    .featured-post-body p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: #6b7280;
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      color: #9ca3af;
+      margin-bottom: 24px;
+    }
+    .post-meta .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: #d1d5db; }
+    .read-more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #1d4ed8;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 500;
+      text-decoration: none;
+      width: fit-content;
+      transition: background 0.2s;
+    }
+    .read-more-btn:hover { background: #1e40af; }
+
+    /* Blog Grid */
+    .blog-grid-section h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 24px;
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .blog-card {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+      transition: box-shadow 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-card:hover {
+      box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+      transform: translateY(-3px);
+    }
+    .blog-card-img {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+    }
+    .blog-card-img.cat-relationship { background: linear-gradient(135deg, #fce7f3, #fbcfe8); }
+    .blog-card-img.cat-marriage     { background: linear-gradient(135deg, #d1fae5, #a7f3d0); }
+    .blog-card-img.cat-mental       { background: linear-gradient(135deg, #e0e7ff, #c7d2fe); }
+    .blog-card-img.cat-intimacy     { background: linear-gradient(135deg, #fef3c7, #fde68a); }
+    .blog-card-img.cat-family       { background: linear-gradient(135deg, #dbeafe, #bfdbfe); }
+    .blog-card-img.cat-personal     { background: linear-gradient(135deg, #f3e8ff, #e9d5ff); }
+    .blog-card-body {
+      padding: 22px 22px 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .blog-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 50px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      width: fit-content;
+    }
+    .tag-relationship { background: #fce7f3; color: #be185d; }
+    .tag-marriage     { background: #d1fae5; color: #065f46; }
+    .tag-mental       { background: #e0e7ff; color: #3730a3; }
+    .tag-intimacy     { background: #fef3c7; color: #92400e; }
+    .tag-family       { background: #dbeafe; color: #1e40af; }
+    .tag-personal     { background: #f3e8ff; color: #6b21a8; }
+    .blog-card-body h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.18rem;
+      font-weight: 600;
+      color: #111827;
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+    .blog-card-body p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      color: #6b7280;
+      line-height: 1.65;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+    .blog-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid #f3f4f6;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+    .blog-card-footer a {
+      color: #1d4ed8;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+    .blog-card-footer a:hover { text-decoration: underline; }
+
+    /* Newsletter Strip */
+    .newsletter-strip {
+      background: linear-gradient(135deg, #1a3250 0%, #0f1c2e 100%);
+      border-radius: 20px;
+      padding: 52px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      margin-bottom: 56px;
+    }
+    .newsletter-text h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .newsletter-text p {
+      font-family: 'DM Sans', sans-serif;
+      color: rgba(255,255,255,0.65);
+      font-size: 0.95rem;
+      max-width: 380px;
+    }
+    .newsletter-form {
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .newsletter-form input {
+      padding: 12px 18px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      width: 260px;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .newsletter-form input::placeholder { color: rgba(255,255,255,0.4); }
+    .newsletter-form input:focus { border-color: rgba(96,165,250,0.6); }
+    .newsletter-form button {
+      padding: 12px 22px;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .newsletter-form button:hover { background: #1d4ed8; }
+
+    /* Load More */
+    .load-more-wrap {
+      text-align: center;
+      margin-top: 8px;
+    }
+    .load-more-btn {
+      padding: 13px 36px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      background: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #374151;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .load-more-btn:hover {
+      border-color: #1d4ed8;
+      color: #1d4ed8;
+    }
+
+    /* No results */
+    .no-posts {
+      text-align: center;
+      padding: 60px 20px;
+      display: none;
+    }
+    .no-posts p {
+      font-family: 'DM Sans', sans-serif;
+      color: #6b7280;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .blog-grid { grid-template-columns: repeat(2, 1fr); }
+      .featured-post { grid-template-columns: 1fr; }
+      .featured-post-img { min-height: 200px; }
+      .newsletter-strip { flex-direction: column; align-items: flex-start; }
+      .newsletter-form { flex-direction: column; width: 100%; }
+      .newsletter-form input { width: 100%; }
+    }
+    @media (max-width: 580px) {
+      .blog-grid { grid-template-columns: 1fr; }
+      .page-hero { padding: 100px 0 60px; }
+      .featured-post-body { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="announce-bar">
+    Now accepting new clients in Port Harcourt &amp; online. &nbsp;
+    <span>207+ lives transformed since 2020.</span>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo">
+          <img src="Images/logo/logo.png" alt="Dr. Josh Therapy Centre">
+          <div class="nav-logo-text">
+            Dr. Josh Therapy Centre
+            <span>Port Harcourt, Nigeria</span>
+          </div>
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li class="has-dropdown">
+            <a href="services/services.html">Services</a>
+            <div class="dropdown">
+              <a href="services/services.html#relationship">❤️ Relationship Therapy</a>
+              <a href="services/services.html#marriage">💍 Marriage Therapy</a>
+              <a href="services/services.html#intimacy">🌿 Intimacy Therapy</a>
+              <a href="services/services.html#family">👨‍👩‍👧 Family Therapy</a>
+              <a href="services/services.html#mental-health">🧠 Mental Health Therapy</a>
+              <a href="services/services.html#emotional">💙 Emotional Healing Therapy</a>
+              <a href="services/services.html#personality">🌱 Personality Development</a>
+            </div>
+          </li>
+          <li><a href="library.html">Library</a></li>
+          <li><a href="blog.html" class="active">Blog</a></li>
+          <li><a href="about-us.html">About</a></li>
+          <li><a href="contact-us.html">Contact</a></li>
+          <li><a href="booking.html" class="nav-cta">Book a Session</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-top">
+      <img src="images/logo/logo.png" alt="Logo" style="height:32px;">
+      <button class="mobile-nav-close" id="navClose">✕</button>
+    </div>
+    <a href="index.html">Home</a>
+    <a href="services/services.html">Services</a>
+    <a href="library.html">Library</a>
+    <a href="blog.html">Blog</a>
+    <a href="about-us.html">About</a>
+    <a href="contact-us.html">Contact</a>
+    <a href="booking.html" class="mobile-cta">Book a Session →</a>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="section-eyebrow">The Dr. Josh Blog</span>
+      <h1>Words That <em>Help</em> You Heal</h1>
+      <p>Insights, advice, and honest conversations on relationships, marriage, mental health, and becoming your best self.</p>
+    </div>
+  </section>
+
+  <!-- FILTER TABS -->
+  <div class="blog-filters">
+    <div class="container">
+      <div class="blog-filters-inner">
+        <button class="filter-btn active" data-filter="all">All Posts</button>
+        <button class="filter-btn" data-filter="relationship">❤️ Relationships</button>
+        <button class="filter-btn" data-filter="marriage">💍 Marriage</button>
+        <button class="filter-btn" data-filter="mental">🧠 Mental Health</button>
+        <button class="filter-btn" data-filter="intimacy">🌿 Intimacy</button>
+        <button class="filter-btn" data-filter="family">👨‍👩‍👧 Family</button>
+        <button class="filter-btn" data-filter="personal">🌱 Personal Growth</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOG MAIN -->
+  <section class="blog-page">
+    <div class="container">
+
+      <!-- Featured Post -->
+      <div class="featured-post" id="featuredPost">
+        <div class="featured-post-img">💔</div>
+        <div class="featured-post-body">
+          <span class="featured-label">⭐ Featured Post</span>
+          <div class="post-meta">
+            <span>Josh Gold</span>
+            <div class="meta-dot"></div>
+            <span>Relationships</span>
+            <div class="meta-dot"></div>
+            <span>8 min read</span>
+          </div>
+          <h2>Why Heartbreak Hurts So Much — And How to Actually Heal From It</h2>
+          <p>The pain of heartbreak is real, neurological, and deeply human. Here is what is happening in your brain and body — and the practical steps that lead to genuine recovery, not just distraction.</p>
+          <a href="#" class="read-more-btn">Read Full Article →</a>
+        </div>
+      </div>
+
+      <!-- Newsletter Strip -->
+      <div class="newsletter-strip">
+        <div class="newsletter-text">
+          <h3>Get New Articles in Your Inbox</h3>
+          <p>Practical advice on relationships, healing, and growth — delivered to you every week. No spam, ever.</p>
+        </div>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Your email address" id="newsletterEmail">
+          <button onclick="handleNewsletter()">Subscribe →</button>
+        </div>
+      </div>
+
+      <!-- Blog Grid -->
+      <div class="blog-grid-section">
+        <h3>Latest Articles</h3>
+        <div class="blog-grid" id="blogGrid">
+
+          <!-- Post 1 -->
+          <div class="blog-card" data-category="relationship">
+            <div class="blog-card-img cat-relationship">❤️</div>
+            <div class="blog-card-body">
+              <span class="blog-tag tag-relationship">Relationships</span>
+              <h4>5 Signs You Are in an Emotionally Unavailable Relationship</h4>
+              <p>Emotional unavailability can be subtle. Learn the patterns that signal your partner may not be able to meet your emotional needs.</p>
+              <div class="blog-card-footer">
+                <span>6 min read</span>
+                <a href="#">Read More →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Post 2 -->
+          <div class="blog-card" data-category="marriage">
+            <div class="blog-card-img cat-marriage">💍</div>
+            <div class="blog-card-body">
+              <span class="blog-tag tag-marriage">Marriage</span>
+              <h4>How to Rebuild Trust After Infidelity — Is It Really Possible?</h4>
+              <p>Betrayal can shatter a marriage. But with the right approach, honesty, and time, many couples do rebuild — stronger than before.</p>
+              <div class="blog-card-footer">
+                <span>9 min read</span>
+                <a href="#">Read More →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Post 3 -->
+          <div class="blog-card" data-category="mental">
+            <div class="blog-card-img cat-mental">🧠</div>
+            <div class="blog-card-body">
+              <span class="blog-tag tag-mental">Mental Health</span>
+              <h4>You Are Not "Too Sensitive" — You Are Probably Unheard</h4>
+              <p>Being told you are overreacting is one of the most damaging things a person can hear. Here is the truth behind emotional invalidation.</p>
+              <div class="blog-card-footer">
+                <span>5 min read</span>
+                <a href="#">Read More →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Post 4 -->
+          <div class="blog-card" data-category="intimacy">
+            <div class="blog-card-img cat-intimacy">🌿</div>
+            <div class="blog-card-body">
+              <span class="blog-tag tag-intimacy">Intimacy</span>
+              <h4>Why Intimacy Fades in Long-Term Relationships — and How to Bring It Back</h4>
+              <p>Feeling disconnected from your partner is more common than you think. These practical steps can reignite closeness and desire.</p>
+              <div class="blog-card-footer">
+                <span>7 min read</span>
+                <a href="#">Read More →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Post 5 -->
+          <div class="blog-card" data-category="family">
+            <div class="blog-card-img cat-family">👨‍👩‍👧</div>
+            <div class="blog-card-body">
+              <span class="blog-tag tag-family">Family</span>
+              <h4>The Real Reason Teenagers Push Their Parents Away</h4>
+              <p>It is not rebellion — it is development. Understanding what is behind the distance can transform your relationship with your teen.</p>
+              <div class="blog-card-footer">
+                <span>6 min read</span>
+                <a href="#">Read More →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Post 6 -->
+          <div class="blog-card" data-category="personal">
+            <div class="blog-card-img cat-personal">🌱</div>
+            <div class="blog-card-body">
+              <span class="blog-tag tag-personal">Personal Growth</span>
+              <h4>People-Pleasing Is Not Kindness — It Is a Trauma Response</h4>
+              <p>If you constantly put others first at the expense of yourself, this is worth reading. True kindness starts with self-respect.</p>
+              <div class="blog-card-footer">
+                <span>5 min read</span>
+                <a href="#">Read More →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Post 7 -->
+          <div class="blog-card" data-category="relationship">
+            <div class="blog-card-img cat-relationship">💬</div>
+            <div class="blog-card-body">
+              <span class="blog-tag tag-relationship">Relationships</span>
+              <h4>How to Have the Hard Conversations Without Destroying the Relationship</h4>
+              <p>Avoiding difficult topics only delays the damage. Here is how to approach sensitive conversations with care and clarity.</p>
+              <div class="blog-card-footer">
+                <span>7 min read</span>
+                <a href="#">Read More →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Post 8 -->
+          <div class="blog-card" data-category="mental">
+            <div class="blog-card-img cat-mental">😔</div>
+            <div class="blog-card-body">
+              <span class="blog-tag tag-mental">Mental Health</span>
+              <h4>The Difference Between Sadness and Depression — And Why It Matters</h4>
+              <p>Not all persistent low moods are depression, but knowing the difference is the first step to getting the right support.</p>
+              <div class="blog-card-footer">
+                <span>6 min read</span>
+                <a href="#">Read More →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Post 9 -->
+          <div class="blog-card" data-category="marriage">
+            <div class="blog-card-img cat-marriage">🤝</div>
+            <div class="blog-card-body">
+              <span class="blog-tag tag-marriage">Marriage</span>
+              <h4>What Every Couple Should Know Before Getting Married</h4>
+              <p>Pre-marital counselling is not just for troubled couples. These are the honest conversations that build strong marriages from day one.</p>
+              <div class="blog-card-footer">
+                <span>8 min read</span>
+                <a href="#">Read More →</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="no-posts" id="noPosts">
+          <p>No articles in this category yet. Check back soon or <a href="contact-us.html">get in touch</a>.</p>
+        </div>
+
+        <div class="load-more-wrap">
+          <button class="load-more-btn" id="loadMoreBtn">Load More Articles</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="Images/logo/color-logo.png" alt="Dr. Josh Therapy Centre">
+          <p>Healing minds, rebuilding relationships, and transforming lives — one conversation at a time. Based in Port Harcourt, serving Nigeria and beyond.</p>
+          <div class="social-row">
+            <a href="https://www.facebook.com/drjoshgold" target="_blank" rel="noopener" class="social-icon">
+              <img src="Images/social media icons/more/Facebook.png" alt="Facebook">
+            </a>
+            <a href="https://www.instagram.com/drjoshgold" target="_blank" rel="noopener" class="social-icon">
+              <img src="Images/social media icons/more/Instagram.png" alt="Instagram">
+            </a>
+            <a href="https://www.x.com/drjoshgold" target="_blank" rel="noopener" class="social-icon">
+              <img src="Images/social media icons/more/X.png" alt="X">
+            </a>
+            <a href="https://www.tiktok.com/@drjoshgold" target="_blank" rel="noopener" class="social-icon">
+              <img src="Images/social media icons/more/Tiktok.png" alt="TikTok">
+            </a>
+            <a href="https://wa.me/2349011339978" target="_blank" rel="noopener" class="social-icon">
+              <img src="Images/social media icons/more/WhatsApp.png" alt="WhatsApp">
+            </a>
+            <a href="https://www.youtube.com/@drjoshgold" target="_blank" rel="noopener" class="social-icon">
+              <img src="Images/social media icons/more/YouTube.png" alt="YouTube">
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Navigate</h5>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services/services.html">Services</a></li>
+            <li><a href="library.html">Library</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="contact-us.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>More</h5>
+          <ul class="footer-links">
+            <li><a href="partnership.html">Partnership</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="donate.html">Donate</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Use</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <div class="footer-contact-item">
+            <span class="ci-icon">📞</span>
+            <a href="tel:+2349011339978">+234 901 133 9978</a>
+          </div>
+          <div class="footer-contact-item">
+            <span class="ci-icon">✉️</span>
+            <a href="mailto:support@drjoshtherapycentre.com">support@drjoshtherapycentre.com</a>
+          </div>
+          <div class="footer-contact-item">
+            <span class="ci-icon">📍</span>
+            <p>No. 26 Elekahia Road, off Stadium Road, Port Harcourt, Rivers State, Nigeria</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Dr. Josh Therapy Centre. All Rights Reserved.</p>
+        <a href="partnership.html">Partner with Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="js/nav.js"></script>
+  <script>
+    // ── Category Filter ──
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const blogCards  = document.querySelectorAll('.blog-card');
+    const noPosts    = document.getElementById('noPosts');
+    const featured   = document.getElementById('featuredPost');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+        let visible = 0;
+
+        blogCards.forEach(card => {
+          const show = filter === 'all' || card.dataset.category === filter;
+          card.style.display = show ? '' : 'none';
+          if (show) visible++;
+        });
+
+        // Hide featured on category filter
+        featured.style.display = filter === 'all' ? '' : 'none';
+        noPosts.style.display  = visible === 0 ? 'block' : 'none';
+      });
+    });
+
+    // ── Newsletter ──
+    function handleNewsletter() {
+      const email = document.getElementById('newsletterEmail').value.trim();
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      alert('Thank you for subscribing! Watch your inbox for our next article.');
+      document.getElementById('newsletterEmail').value = '';
+    }
+
+    // ── Load More (placeholder) ──
+    document.getElementById('loadMoreBtn').addEventListener('click', function () {
+      this.textContent = 'More articles coming soon…';
+      this.disabled = true;
+      this.style.opacity = '0.5';
+    });
+  </script>
+  <script type="module" src="js/analytics.js"></script>
+</body>
+</html>
